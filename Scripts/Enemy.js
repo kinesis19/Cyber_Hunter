@@ -90,10 +90,10 @@ const enemyObject = WORLD.getObject("Enemy");
 
 function spawnEnemyRandomly() {
     const areas = {
-        'AreaA': { xRange: [17, 30], zRange: [18, 32], y: 3 },
-        'AreaB': { xRange: [-17, -30], zRange: [18, 32], y: 3 },
-        'AreaC': { xRange: [17, -30], zRange: [-18, -32], y: 3 },
-        'AreaD': { xRange: [-17, -30], zRange: [-18, -32], y: 3 }
+        'AreaA': { xRange: [PLAYER.position.x - 20, PLAYER.position.x - 30], zRange: [PLAYER.position.z - 20, PLAYER.position.z - 30], y: 2 },
+        'AreaB': { xRange: [PLAYER.position.x + 20, PLAYER.position.x + 30], zRange: [PLAYER.position.z - 20, PLAYER.position.z - 30], y: 2 },
+        'AreaC': { xRange: [PLAYER.position.x - 20, PLAYER.position.x - 30], zRange: [PLAYER.position.z + 20, PLAYER.position.z + 30], y: 2 },
+        'AreaD': { xRange: [PLAYER.position.x + 20, PLAYER.position.x + 30], zRange: [PLAYER.position.z + 20, PLAYER.position.z + 30], y: 2 }
     };
 
     // Select a random area
