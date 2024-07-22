@@ -27,8 +27,8 @@ Fix : 버그 수정 🐛<br>
 변경된 사항에 대한 간략한 메시지를 남깁니다.<br>
 
 ## Commit File
-to (FileName).c : 새로운 함수를 파일에 추가한 경우<br>
-in (FileName).c : 특정 함수 내의 로직을 수정한 경우<br>
+to (FileName).js : 새로운 함수를 파일에 추가한 경우<br>
+in (FileName).js : 특정 함수 내의 로직을 수정한 경우<br>
 
 
 ## Commit Format
