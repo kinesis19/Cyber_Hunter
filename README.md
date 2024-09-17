@@ -1,36 +1,99 @@
-# Cyber_Hunter
-Project: Cyber Hunter
-
-# Commit Rule
-[gitmoji](https://gitmoji.dev/) 사용을 반드시 할 것.
-
-## Gitmoji
-✨(sparkles): 새 기능 추가<br>
-🚀(rocket): 성능 개선<br>
-🔧(wrench): 구성 파일 추가 / 업데이트<br>
-🔨(hammer): 개발 스크립트 추가 / 업데이트<br>
-📦(package) : 컴파일된 파일 추가<br>
-🐛(bug) : 버그 수정<br>
-📝(memo) : 문서 추가 / 업데이트<br>
-💄(lipstick) : UI 개선<br>
-🚚(truck) : 파일 / 경로 / 이름 변경<br>
-
-## Commit Title
-Create : 새 파일이나 프로젝트를 생성할 때 🔨, 🎉<br>
-Add : 새 기능이나 파일을 추가할 때 ✨<br>
-Delete : 파일이나 기능을 삭제할 때 🔥<br>
-Update : 기능을 개선하거나 중요한 변경을 할 때 🚀<br>
-Modify : 기존 기능의 작은 수정이나 리팩토링 🔧, ♻️<br>
-Fix : 버그 수정 🐛<br>
-
-## Commit Message
-변경된 사항에 대한 간략한 메시지를 남깁니다.<br>
-
-## Commit File
-to (FileName).js : 새로운 함수를 파일에 추가한 경우<br>
-in (FileName).js : 특정 함수 내의 로직을 수정한 경우<br>
+# 📘Table of Contents
+- [📖 Cyber Hunter](#-cyber_hunter)
+- [💻 Getting Started](#-getting-started)
+    - [Setup](#setup)
+    - [Install](#install)
+- [🌱 Commit Rule](#-commit-rule)
+    - [gitmoji](#gitmoji)
+    - [Commit Type](#commit-type)
+    - [Commit Message](#commit-message)
+    - [Commit Format](#commit-format)
+- [💁 Author](#-author)
 
 
-## Commit Format
+# **📖 Cyber_Hunter**
+[Redbrick] Project: Cyber_Hunter
 
-(Gitmoji) (Commit Title) (Commit Message) (Commit File)
+
+## **💻 Getting Started**
+
+## Setup
+Did not need Setup :)
+Just Open the Redbrick in your chrome!
+
+## Install
+1. [Visual Studio Code(Option)](https://code.visualstudio.com/)
+
+
+## **🌱 Commit Rule**
+Base Rule : [gitmoji](https://gitmoji.dev/) <br>
+Other Rule : Define personal rules.<br>
+Coding Style : [Google-StyleGuid-Cpp](https://google.github.io/styleguide/cppguide.html)<br>
+Other Style : Follow Google StyleGuide. The part I haven't figured out yet, I write the code in my personal style.<br>
+
+
+### **Gitmoji**
+
+<details>
+<summary>Open/Close</summary>
+
+<!-- summary You must leave a blank space on top -->
+| Gitmoji | Description |
+| :--- | :--- |
+| 🎉(tada) | Begin a project |
+| ✨(sparkles) | Introduce new features |
+| ⚡(zap) | Improve performance |
+| 🔧(wrench) | Add or update configuration files |
+| 🔨(hammer) | Add or update development scripts |
+| 🔥(fire) | Remove code or files |
+| 💩(poop) | Write bad code that needs to be improved |
+| 💡(bulb) | Add or update comments in source code |
+| 🩹(adhesive_bandage) | Simple fix for a non-critical issue |
+| 🚚(truck) | Move or rename resources (e.g.: files, paths, routes) |
+| ⚰️(coffin) | Remove dead code |
+| 🐛(bug) | Fix a bug |
+| 🚧(construction) | Work in progress |
+| ⚗️(alembic) | Perform experiments |
+| ♻️(recycle) | Refactor code |
+| 📝(memo) | Add or update documentation |
+| ✏️(pencil2) | Fix typos |
+| 🍱(bento) | Add or update assets |
+| 💄(lipstick) | Add or update the UI and style files |
+| 🙈(see_no_evil) | Add or update a .gitignore file |
+| ⏪(rewind) | Revert changes |
+| 📦(package) | Add or update compiled files or packages |
+</details>
+
+
+### **Commit Type**
+
+<details>
+<summary>Open/Close</summary>
+
+<!-- summary You must leave a blank space on top -->
+| Name | Description |
+| :--- | :--- |
+| Create | Create New file / Project|
+| Add | Add New File |
+| Feat | Create New Feature |
+| Delete | Delete file / feature |
+| Update | Improve feature / Make significant changes |
+| Fix | Fix bug |
+| Docs | Edit a document |
+| Refactor |    Refactoryiing the code.
+</details>
+
+
+### **Commit Message**
+Leave a brief message about the changes.<br>
+
+
+### **Commit Format**
+
+(Gitmoji) (Commit Type): (Commit Message) (Commit File target)
+
+
+## 💁 Author
+💁 Kinesis Akashic
+- Github: [@kinesis19](https://github.com/kinesis19)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/kinesis19/)
