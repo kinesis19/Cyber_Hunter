@@ -9,21 +9,22 @@ function Start() {
 }
 
 function Update(dt) {
-    
+    ground.position.set(PLAYER.position.x, 0, PLAYER.position.z);
+    ground.body.needUpdate = true;
 }
 /*[Need Fix]
 * 대각선 키(w + a, w + d, s + a, s + d)를 누르고 있다가 한 쪽 키를 때면 키 입력이 무시되는 현상이 발생됨.
 */
 
 function OnKeyDown(event) {
-    switch (event.key.toLowerCase()) {
-        case 'w':
-        case 'a':
-        case 's':
-        case 'd':
-            getPlayerMovementDirection();
-            break;
-    }
+    // switch (event.key.toLowerCase()) {
+    //     case 'w':
+    //     case 'a':
+    //     case 's':
+    //     case 'd':
+    //         getPlayerMovementDirection();
+    //         break;
+    // }
 }
 
 function getPlayerMovementDirection() {
