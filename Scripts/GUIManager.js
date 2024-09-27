@@ -1,4 +1,5 @@
 const guiBoardStage = GUI.getObject("GUI_Board_Round");
+const guiBoardEnemyCnt = GUI.getObject("GUI_Board_EnemyCnt");
 
 REDBRICK.Signal.addListener("CHECK_GUI_ROUND", function(params) {
     if(params.round == 1){
@@ -8,4 +9,8 @@ REDBRICK.Signal.addListener("CHECK_GUI_ROUND", function(params) {
     }else if(params.round == 3){
         guiBoardStage.setText("Round : 3");
     }
+})
+
+REDBRICK.Signal.addListener("CHECK_GUI_ENEMYCNT", function(params) {
+    guiBoardEnemyCnt.setText("Enemy : " + GLOBAL.enemyNowCount + " / " + GLOBAL.enemyMaxCount);
 })

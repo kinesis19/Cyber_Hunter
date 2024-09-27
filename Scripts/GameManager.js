@@ -11,9 +11,12 @@ REDBRICK.Signal.addListener("CHECK_NEXT_ROUND", function(params) {
         console.log("Success!");
     }
 })
-
+// 게임 최초 실행 처리
 function Start(){
+    // 최초 GUI Update
     REDBRICK.Signal.send("CHECK_GUI_ROUND", {round: 1});
+    REDBRICK.Signal.send("CHECK_GUI_ENEMYCNT");
+
 }
 
 function RoundResetting(){

@@ -58,10 +58,11 @@ function Start(){
                 params.bullet.life = 0;
                 enemyList[i].health -= damage;
             }
-            if(enemyList[i].health <= 0){
+            if(enemyList[i].health <= 0){ // Enemy 사망 처리하기.
                 GLOBAL.enemyNowCount = GLOBAL.enemyNowCount + 1;
                 enemyList[i].dispose();
                 enemyList.splice(i, 1);
+                REDBRICK.Signal.send("CHECK_GUI_ENEMYCNT");
                 i--;
             }
         }
