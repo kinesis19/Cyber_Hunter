@@ -16,17 +16,6 @@ function Update(dt) {
 * 대각선 키(w + a, w + d, s + a, s + d)를 누르고 있다가 한 쪽 키를 때면 키 입력이 무시되는 현상이 발생됨.
 */
 
-function OnKeyDown(event) {
-    // switch (event.key.toLowerCase()) {
-    //     case 'w':
-    //     case 'a':
-    //     case 's':
-    //     case 'd':
-    //         getPlayerMovementDirection();
-    //         break;
-    // }
-}
-
 function getPlayerMovementDirection() {
     let currentPosition = PLAYER.position;
     let directionVector = currentPosition.clone().sub(previousPosition);
