@@ -1,5 +1,5 @@
 class Enemy{
-    constructor(object, player){
+    constructor(object, player, dropExp){
         this.object = object;
         this.player = player;
         
@@ -12,7 +12,7 @@ class Enemy{
         // Define the radius for collision
         this.radius = 1; // 각 적의 반경을 설정.
 
-        this.dropExp = 1;
+        this.dropExp = dropExp;
     }
     update(dt, enemyList) {
         const direction = new THREE.Vector3().subVectors(new THREE.Vector3(this.player.position.x, this.object.position.y, this.player.position.z), this.object.position);
@@ -62,10 +62,14 @@ function Start(){
             }
             if(enemyList[i].health <= 0){ // Enemy 사망 처리하기.
                 GLOBAL.enemyNowCount = GLOBAL.enemyNowCount + 1;
+
+                REDBRICK.Signal.send("CHECK_PLAYER_STATUS", {action: "addExp", amount: enemyList[i].dropExp}); // Getting dropExp
+                REDBRICK.Signal.send("CHECK_PLAYER_STATUS_REQUEST");
+                REDBRICK.Signal.send("CHECK_GUI_PROGRESSBAR");
+                REDBRICK.Signal.send("CHECK_GUI_ENEMYCNT");
+
                 enemyList[i].dispose();
                 enemyList.splice(i, 1);
-                REDBRICK.Signal.send("CHECK_PLAYER_STATUS", {action: "addExp", amount: this.dropExp});
-                REDBRICK.Signal.send("CHECK_GUI_ENEMYCNT");
                 i--;
             }
         }
@@ -127,6 +131,6 @@ function spawnEnemyRandomly() {
     clone.position.set(x, y, z);
     WORLD.add(clone);
 
-    const enemy = new Enemy(clone, PLAYER);
+    const enemy = new Enemy(clone, PLAYER, 1);
     enemyList.push(enemy);
 }
