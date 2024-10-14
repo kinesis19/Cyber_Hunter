@@ -11,6 +11,8 @@ class Enemy{
         this.speed = 0.02;
         // Define the radius for collision
         this.radius = 1; // 각 적의 반경을 설정.
+
+        this.dropExp = 1;
     }
     update(dt, enemyList) {
         const direction = new THREE.Vector3().subVectors(new THREE.Vector3(this.player.position.x, this.object.position.y, this.player.position.z), this.object.position);
@@ -62,6 +64,7 @@ function Start(){
                 GLOBAL.enemyNowCount = GLOBAL.enemyNowCount + 1;
                 enemyList[i].dispose();
                 enemyList.splice(i, 1);
+                REDBRICK.Signal.send("CHECK_PLAYER_STATUS", {action: "addExp", amount: this.dropExp});
                 REDBRICK.Signal.send("CHECK_GUI_ENEMYCNT");
                 i--;
             }
