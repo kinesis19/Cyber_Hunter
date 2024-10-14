@@ -1,5 +1,7 @@
 const guiBoardStage = GUI.getObject("GUI_Board_Round");
 const guiBoardEnemyCnt = GUI.getObject("GUI_Board_EnemyCnt");
+const guiProgressBarBack = GUI.getObject("GUI_Progress_Bar_Back");
+const guiProgressBarFront = GUI.getObject("GUI_Progress_Bar_Front");
 
 REDBRICK.Signal.addListener("CHECK_GUI_ROUND", function(params) {
     if(params.round == 1){
@@ -12,5 +14,9 @@ REDBRICK.Signal.addListener("CHECK_GUI_ROUND", function(params) {
 })
 
 REDBRICK.Signal.addListener("CHECK_GUI_ENEMYCNT", function(params) {
+    guiBoardEnemyCnt.setText("Enemy : " + GLOBAL.enemyNowCount + " / " + GLOBAL.enemyMaxCount);
+})
+
+REDBRICK.Signal.addListener("CHECK_GUI_ALL", function(params) {
     guiBoardEnemyCnt.setText("Enemy : " + GLOBAL.enemyNowCount + " / " + GLOBAL.enemyMaxCount);
 })
