@@ -3,18 +3,58 @@ const ground = WORLD.getObject("Ground");
 const controlAreaSize = 10; // 플레이어의 구역 (해당 구역을 넘어서면 ground 오브젝트가 이동됨).
 const moveDistance = 2; // ground 오브젝트의 이동 간격.
 
+class Player {
+    constructor(hp = 10, sp = 10, exp = 0, money = 0) {
+        this.hp = hp;
+        this.sp = sp;
+        this.exp = exp;
+        this.money = money;
+    }
+
+    // Methods to modify player's stats
+    addExp(amount) {
+        this.exp += amount;
+    }
+
+    addMoney(amount) {
+        this.money += amount;
+    }
+
+    takeDamage(damage) {
+        this.hp -= damage;
+        if (this.hp < 0){
+            this.hp = 0;
+        }
+    }
+
+    useSkillPoints(points) {
+        if (this.sp >= points) {
+            this.sp -= points;
+        }
+    }
+}
+
+
+
 function Start() {
     // 플레이어의 시작 좌표를 복사함 -> 플레이어의 이동 방향을 알아내기 위함.
     previousPosition = PLAYER.position.clone();
+
+    const player = new Player(10, 5, 0, 100);
 }
+
+
+REDBRICK.Signal.addListener("CHECK_PLAYER_STATUS", function(params) {
+    if(params.action == "addExp"){
+        player.addExp(params.amount);
+    }
+})
+
 
 function Update(dt) {
     ground.position.set(PLAYER.position.x, 0, PLAYER.position.z);
     ground.body.needUpdate = true;
 }
-/*[Need Fix]
-* 대각선 키(w + a, w + d, s + a, s + d)를 누르고 있다가 한 쪽 키를 때면 키 입력이 무시되는 현상이 발생됨.
-*/
 
 function getPlayerMovementDirection() {
     let currentPosition = PLAYER.position;
