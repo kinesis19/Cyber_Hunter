@@ -28,11 +28,6 @@ REDBRICK.Signal.addListener("CHECK_GUI_ENEMYCNT", function(params) {
     guiBoardEnemyCnt.setText("Enemy : " + GLOBAL.enemyNowCount + " / " + GLOBAL.enemyMaxCount);
 })
 
-REDBRICK.Signal.addListener("CHECK_GUI_ALL", function(params) {
-    guiBoardEnemyCnt.setText("Enemy : " + GLOBAL.enemyNowCount + " / " + GLOBAL.enemyMaxCount);
-})
-
-
 
 // Send status of player to GUIManager|
 REDBRICK.Signal.addListener("CHECK_PLAYER_STATUS_REPLY", function(params) {
