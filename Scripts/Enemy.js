@@ -64,12 +64,10 @@ function Start(){
             }
             if(enemyList[i].health <= 0){ // Enemy 사망 처리하기.
                 GLOBAL.playerKillCount = GLOBAL.playerKillCount + 1;
-                
-                //REDBRICK.Signal.send("CHECK_PLAYER_STATUS", {action: "addExp", amount: enemyList[i].dropExp}); // Getting dropExp
                 GLOBAL.player.addExp(enemyList[i].dropExp);
-                REDBRICK.Signal.send("CHECK_PLAYER_STATUS_REQUEST");
-                REDBRICK.Signal.send("CHECK_GUI_PROGRESSBAR");
-                REDBRICK.Signal.send("CHECK_GUI_ENEMYCNT");
+
+                // REDBRICK.Signal.send("CHECK_PLAYER_STATUS_REQUEST");
+                REDBRICK.Signal.send("UPDATE_NEXT_ROUND");
 
                 enemyList[i].dispose();
                 enemyList.splice(i, 1);
@@ -79,9 +77,12 @@ function Start(){
     })
     
     setInterval(() => {
-        if (GLOBAL.playerKillCount < GLOBAL.enemyMaxCount) {
-            spawnEnemyRandomly();
-        }
+
+        // Temp Debugging: Loop Respawn -> Need to changing Object pooling
+        spawnEnemyRandomly();
+        // if (GLOBAL.playerKillCount < GLOBAL.enemyMaxCount) {
+        //     spawnEnemyRandomly();
+        // }
     }, GLOBAL.mobSpawnSpeed);
 }
 
@@ -106,7 +107,8 @@ function Update(dt){
     }
     if(GLOBAL.playerKillCount == GLOBAL.enemyMaxCount && GLOBAL.isRoundClear){
         GLOBAL.isRoundClear = false;
-        REDBRICK.Signal.send("CHECK_NEXT_ROUND");
+        // Temp Disable
+        //REDBRICK.Signal.send("CHECK_NEXT_ROUND");
     }
     
 }
