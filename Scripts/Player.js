@@ -1,6 +1,6 @@
 let previousPosition = null;
-const controlAreaSize = 10; // 플레이어의 구역 (해당 구역을 넘어서면 ground 오브젝트가 이동됨).
-const moveDistance = 2; // ground 오브젝트의 이동 간격.
+const controlAreaSize = 10; // Player's Area (The ground object is moved when the player crosses the area)
+const moveDistance = 2; // ground Moving distance
 
 GLOBAL.player;
 
@@ -57,7 +57,7 @@ class Player {
 
 
 function Start() {
-    // 플레이어의 시작 좌표를 복사함 -> 플레이어의 이동 방향을 알아내기 위함.
+    // Clone the Player's position
     previousPosition = PLAYER.position.clone();
 
     GLOBAL.player = new Player(10, 10, 5, 0, 0, 10, 100);

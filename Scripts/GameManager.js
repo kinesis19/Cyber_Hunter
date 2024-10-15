@@ -5,22 +5,19 @@ GLOBAL.mobSpawnSpeed = 3000;
 GLOBAL.playerKillCount = 0;
 GLOBAL.enemyMaxCount = 10;
 
-// 게임 최초 실행 처리
+
+let frameCount = 0;
+
+
 function Start(){
 
 }
-
-
-// New (Refactoring)
-// GOAL: Making a one cycle
 
 // Using the Update Method to Update GUI
 function Update(dt){
 
     // GUI Update
-    // GLOBAL.guiBoardEnemyCnt.setText("Enemy : " + GLOBAL.playerKillCount + " / " + GLOBAL.enemyMaxCount);
-    // Need to Changing the text and show
-    GLOBAL.guiBoardEnemyCnt.setText("Enemy Killed: " + GLOBAL.playerKillCount);
+    GLOBAL.guiBoardEnemyCnt.setText("Kill: " + GLOBAL.playerKillCount);
     GLOBAL.guiBoardStage.setText("Round : " + GLOBAL.gameRound);
     GLOBAL.guiProgressBarFront.size.x.value = GLOBAL.player.exp / GLOBAL.player.maxExp * GLOBAL.MAX_LENGTH_PB_FRONT;
     GLOBAL.guiLevel.setText("Lv." + GLOBAL.player.level + "\n\n" + "(exp: " + GLOBAL.player.exp + "/" + GLOBAL.player.maxExp + ")");
@@ -28,7 +25,37 @@ function Update(dt){
     // Obj Update
     GLOBAL.ground.position.set(PLAYER.position.x, 0, PLAYER.position.z);
     GLOBAL.ground.body.needUpdate = true;
+
+    // Enemy Update
+    // Update enemies every frame
+    for (let i = 0; i < GLOBAL.enemyList.length; i++) {
+        GLOBAL.enemyList[i].update(dt, GLOBAL.enemyList);
+    }
+
+    // Check if enemies are out of player range every 10 frames
+    if (frameCount % 10 === 0) {
+        for (let i = 0; i < GLOBAL.enemyList.length; i++) {
+            const enemy = GLOBAL.enemyList[i];
+            const playerPos = PLAYER.position;
+            const enemyPos = enemy.object.position;
+
+            if ((enemyPos.x > playerPos.x + 60 || enemyPos.x < playerPos.x - 60) ||
+                (enemyPos.z > playerPos.z + 60 || enemyPos.z < playerPos.z - 60)) {
+                enemy.dispose();
+                GLOBAL.enemyList.splice(i, 1); // Enemy delete
+                i--; // Adjusting indexes
+            }
+        }
+    }
+
+    // Check Rount clear
+    if (GLOBAL.playerKillCount == GLOBAL.enemyMaxCount && GLOBAL.isRoundClear) {
+        GLOBAL.isRoundClear = false;
+    }
+
+    frameCount++; // Add frameCount
 }
+
 
 REDBRICK.Signal.addListener("UPDATE_NEXT_ROUND", function(params) {
     if(GLOBAL.playerKillCount == GLOBAL.enemyMaxCount){

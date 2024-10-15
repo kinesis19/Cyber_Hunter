@@ -10,7 +10,7 @@ class Enemy{
         // Enemy move speed
         this.speed = 0.02;
         // Define the radius for collision
-        this.radius = 1; // 각 적의 반경을 설정.
+        this.radius = 1; // Setting the radius of Enemy
 
         this.damage = dmg;
         
@@ -38,14 +38,13 @@ class Enemy{
                 this.object.position.add(this.moveVector);
             }
 
-            // 오브젝트가 플레이어를 바라보게 하되, y축은 현재 오브젝트의 높이를 유지함.
+            // Enemy lookAt Player, But position Y is staying current position
             const lookAtPosition = new THREE.Vector3(this.player.position.x, this.object.position.y, this.player.position.z);
             this.object.lookAt(lookAtPosition);
         }
     }
 
     dispose() {
-        //this.object.removeFromParent();
         WORLD.remove(this.object);
     }
 }
@@ -61,7 +60,9 @@ function Start(){
                 params.bullet.life = 0;
                 GLOBAL.enemyList[i].health -= GLOBAL.player.atk;
             }
-            if(GLOBAL.enemyList[i].health <= 0){ // Enemy 사망 처리하기.
+            
+            // Enemy Kill Processing
+            if(GLOBAL.enemyList[i].health <= 0){ 
                 GLOBAL.playerKillCount = GLOBAL.playerKillCount + 1;
                 GLOBAL.player.addExp(GLOBAL.enemyList[i].dropExp);
                 
@@ -84,30 +85,6 @@ function Start(){
     }, GLOBAL.mobSpawnSpeed);
 }
 
-
-function Update(dt){
-    // 현재 스폰되어 있는 Enemy 체크 및 업데이트하기.
-    for(let i = 0; i < GLOBAL.enemyList.length; i++){
-        GLOBAL.enemyList[i].update(dt, GLOBAL.enemyList);
-
-        /* Enemy가 특정 범위(플레이어 좌표 기준)를 벗어났을 때 처리하기.
-        Enemy 오브젝트 최적화 작업.
-        */
-
-        if ((GLOBAL.enemyList[i].object.position.x > PLAYER.position.x + 60 || GLOBAL.enemyList[i].object.position.x < PLAYER.position.x - 60) ||
-            (GLOBAL.enemyList[i].object.position.z > PLAYER.position.z + 60 || GLOBAL.enemyList[i].object.position.z < PLAYER.position.z - 60)) {
-            GLOBAL.enemyList[i].dispose();
-            GLOBAL.enemyList.splice(i, 1);
-            i--;
-        }
-
-
-    }
-    if(GLOBAL.playerKillCount == GLOBAL.enemyMaxCount && GLOBAL.isRoundClear){
-        GLOBAL.isRoundClear = false;
-    }
-    
-}
 
 const enemyObject = WORLD.getObject("Enemy");
 
