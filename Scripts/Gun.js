@@ -3,9 +3,8 @@ function Start() {
 }
 
 function Update(dt) {
-	if(this.equipped == true){
-	    return;
-	}
+	if(this.equipped == true) return;
+	
 	const dist = this.position.distanceTo(PLAYER.position);
 	if(dist < 5){
 		this.equipped = true;

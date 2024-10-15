@@ -2,7 +2,7 @@ let previousPosition = null;
 const controlAreaSize = 10; // 플레이어의 구역 (해당 구역을 넘어서면 ground 오브젝트가 이동됨).
 const moveDistance = 2; // ground 오브젝트의 이동 간격.
 
-let player;
+GLOBAL.player;
 
 class Player {
     constructor(hp = 10, sp = 10, atk = 5, level = 0, exp = 0, maxExp = 10, money = 0) {
@@ -62,8 +62,3 @@ function Start() {
 
     GLOBAL.player = new Player(10, 10, 5, 0, 0, 10, 100);
 }
-
-// function Update(dt) {
-//     GLOBAL.ground.position.set(PLAYER.position.x, 0, PLAYER.position.z);
-//     GLOBAL.ground.body.needUpdate = true;
-// }

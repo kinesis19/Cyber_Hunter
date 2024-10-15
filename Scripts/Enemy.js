@@ -50,25 +50,25 @@ class Enemy{
     }
 }
 
-const enemyList = [];
+GLOBAL.enemyList = [];
 
 function Start(){
     REDBRICK.Signal.addListener("CHECK_ENEMY_HIT", function(params) {
-        for(let i = 0; i < enemyList.length; i++){
-            const dist = enemyList[i].object.position.distanceTo(params.bullet.object.position);
+        for(let i = 0; i < GLOBAL.enemyList.length; i++){
+            const dist = GLOBAL.enemyList[i].object.position.distanceTo(params.bullet.object.position);
             
             if(dist < 5){
                 params.bullet.life = 0;
-                enemyList[i].health -= GLOBAL.player.atk;
+                GLOBAL.enemyList[i].health -= GLOBAL.player.atk;
             }
-            if(enemyList[i].health <= 0){ // Enemy 사망 처리하기.
+            if(GLOBAL.enemyList[i].health <= 0){ // Enemy 사망 처리하기.
                 GLOBAL.playerKillCount = GLOBAL.playerKillCount + 1;
-                GLOBAL.player.addExp(enemyList[i].dropExp);
+                GLOBAL.player.addExp(GLOBAL.enemyList[i].dropExp);
                 
                 REDBRICK.Signal.send("UPDATE_NEXT_ROUND");
 
-                enemyList[i].dispose();
-                enemyList.splice(i, 1);
+                GLOBAL.enemyList[i].dispose();
+                GLOBAL.enemyList.splice(i, 1);
                 i--;
             }
         }
@@ -87,17 +87,17 @@ function Start(){
 
 function Update(dt){
     // 현재 스폰되어 있는 Enemy 체크 및 업데이트하기.
-    for(let i = 0; i < enemyList.length; i++){
-        enemyList[i].update(dt, enemyList);
+    for(let i = 0; i < GLOBAL.enemyList.length; i++){
+        GLOBAL.enemyList[i].update(dt, GLOBAL.enemyList);
 
         /* Enemy가 특정 범위(플레이어 좌표 기준)를 벗어났을 때 처리하기.
         Enemy 오브젝트 최적화 작업.
         */
 
-        if ((enemyList[i].object.position.x > PLAYER.position.x + 60 || enemyList[i].object.position.x < PLAYER.position.x - 60) ||
-            (enemyList[i].object.position.z > PLAYER.position.z + 60 || enemyList[i].object.position.z < PLAYER.position.z - 60)) {
-            enemyList[i].dispose();
-            enemyList.splice(i, 1);
+        if ((GLOBAL.enemyList[i].object.position.x > PLAYER.position.x + 60 || GLOBAL.enemyList[i].object.position.x < PLAYER.position.x - 60) ||
+            (GLOBAL.enemyList[i].object.position.z > PLAYER.position.z + 60 || GLOBAL.enemyList[i].object.position.z < PLAYER.position.z - 60)) {
+            GLOBAL.enemyList[i].dispose();
+            GLOBAL.enemyList.splice(i, 1);
             i--;
         }
 
@@ -133,5 +133,5 @@ function spawnEnemyRandomly() {
     WORLD.add(clone);
 
     const enemy = new Enemy(clone, PLAYER, 10, 5, 1);
-    enemyList.push(enemy);
+    GLOBAL.enemyList.push(enemy);
 }
