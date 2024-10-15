@@ -1,9 +1,9 @@
-const MAX_LENGTH_PB_FRONT = 27.5;
+GLOBAL.MAX_LENGTH_PB_FRONT = 27.5;
 
-const guiBoardStage = GUI.getObject("GUI_Board_Round");
-const guiBoardEnemyCnt = GUI.getObject("GUI_Board_EnemyCnt");
-const guiProgressBarBack = GUI.getObject("GUI_Progress_Bar_Back");
-const guiProgressBarFront = GUI.getObject("GUI_Progress_Bar_Front");
+GLOBAL.guiBoardStage = GUI.getObject("GUI_Board_Round");
+GLOBAL.guiBoardEnemyCnt = GUI.getObject("GUI_Board_EnemyCnt");
+GLOBAL.guiProgressBarBack = GUI.getObject("GUI_Progress_Bar_Back");
+GLOBAL.guiProgressBarFront = GUI.getObject("GUI_Progress_Bar_Front");
 
 const playerStatus = {
     hp: 0,
@@ -14,19 +14,19 @@ const playerStatus = {
     money: 0
 };
 
-REDBRICK.Signal.addListener("CHECK_GUI_ROUND", function(params) {
-    if(params.round == 1){
-        guiBoardStage.setText("Round : 1");
-    }else if(params.round == 2){
-        guiBoardStage.setText("Round : 2");
-    }else if(params.round == 3){
-        guiBoardStage.setText("Round : 3");
-    }
-})
+// REDBRICK.Signal.addListener("CHECK_GUI_ROUND", function(params) {
+//     if(params.round == 1){
+//         GLOBAL.guiBoardStage.setText("Round : 1");
+//     }else if(params.round == 2){
+//         GLOBAL.guiBoardStage.setText("Round : 2");
+//     }else if(params.round == 3){
+//         GLOBAL.guiBoardStage.setText("Round : 3");
+//     }
+// })
 
-REDBRICK.Signal.addListener("CHECK_GUI_ENEMYCNT", function(params) {
-    guiBoardEnemyCnt.setText("Enemy : " + GLOBAL.enemyNowCount + " / " + GLOBAL.enemyMaxCount);
-})
+// REDBRICK.Signal.addListener("CHECK_GUI_ENEMYCNT", function(params) {
+//     GLOBAL.guiBoardEnemyCnt.setText("Enemy : " + GLOBAL.enemyNowCount + " / " + GLOBAL.enemyMaxCount);
+// })
 
 
 // Send status of player to GUIManager|
@@ -41,11 +41,11 @@ REDBRICK.Signal.addListener("CHECK_PLAYER_STATUS_REPLY", function(params) {
 
 // Send status of player to GUIManager|
 REDBRICK.Signal.addListener("CHECK_GUI_PROGRESSBAR", function(params) {
-    UpdateProgressBar();
+    // UpdateProgressBar();
 })
 
 
-function UpdateProgressBar(){
-    guiProgressBarFront.size.x.value = playerStatus.exp / playerStatus.maxExp * MAX_LENGTH_PB_FRONT;
-    guiProgressBarBack.setText(playerStatus.exp + "\n" + playerStatus.maxExp);
-}
+// function UpdateProgressBar(){
+//     GLOBAL.guiProgressBarFront.size.x.value = playerStatus.exp / playerStatus.maxExp * MAX_LENGTH_PB_FRONT;
+//     GLOBAL.guiProgressBarBack.setText(playerStatus.exp + "\n" + playerStatus.maxExp);
+// }

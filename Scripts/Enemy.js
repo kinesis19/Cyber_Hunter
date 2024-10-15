@@ -50,8 +50,8 @@ class Enemy{
 
 const enemyList = [];
 let damage = 50;
-GLOBAL.playerKillCount = 0;
-GLOBAL.enemyMaxCount = 10;
+// GLOBAL.playerKillCount = 0;
+// GLOBAL.enemyMaxCount = 10;
 
 function Start(){
     REDBRICK.Signal.addListener("CHECK_ENEMY_HIT", function(params) {
@@ -63,9 +63,10 @@ function Start(){
                 enemyList[i].health -= damage;
             }
             if(enemyList[i].health <= 0){ // Enemy 사망 처리하기.
-                GLOBAL.enemyNowCount = GLOBAL.enemyNowCount + 1;
-
-                REDBRICK.Signal.send("CHECK_PLAYER_STATUS", {action: "addExp", amount: enemyList[i].dropExp}); // Getting dropExp
+                GLOBAL.playerKillCount = GLOBAL.playerKillCount + 1;
+                
+                //REDBRICK.Signal.send("CHECK_PLAYER_STATUS", {action: "addExp", amount: enemyList[i].dropExp}); // Getting dropExp
+                GLOBAL.player.addExp(enemyList[i].dropExp);
                 REDBRICK.Signal.send("CHECK_PLAYER_STATUS_REQUEST");
                 REDBRICK.Signal.send("CHECK_GUI_PROGRESSBAR");
                 REDBRICK.Signal.send("CHECK_GUI_ENEMYCNT");
@@ -78,7 +79,7 @@ function Start(){
     })
     
     setInterval(() => {
-        if (GLOBAL.enemyNowCount < GLOBAL.enemyMaxCount) {
+        if (GLOBAL.playerKillCount < GLOBAL.enemyMaxCount) {
             spawnEnemyRandomly();
         }
     }, GLOBAL.mobSpawnSpeed);
@@ -103,7 +104,7 @@ function Update(dt){
 
 
     }
-    if(GLOBAL.enemyNowCount == GLOBAL.enemyMaxCount && GLOBAL.isRoundClear){
+    if(GLOBAL.playerKillCount == GLOBAL.enemyMaxCount && GLOBAL.isRoundClear){
         GLOBAL.isRoundClear = false;
         REDBRICK.Signal.send("CHECK_NEXT_ROUND");
     }

@@ -60,13 +60,13 @@ function Start() {
     // 플레이어의 시작 좌표를 복사함 -> 플레이어의 이동 방향을 알아내기 위함.
     previousPosition = PLAYER.position.clone();
 
-    player = new Player(10, 10, 0, 0, 10, 100);
+    GLOBAL.player = new Player(10, 10, 0, 0, 10, 100);
 }
 
 
 REDBRICK.Signal.addListener("CHECK_PLAYER_STATUS", function(params) {
     if(params.action == "addExp"){
-        player.addExp(params.amount);
+        GLOBAL.player.addExp(params.amount);
     }
 })
 
@@ -74,12 +74,12 @@ REDBRICK.Signal.addListener("CHECK_PLAYER_STATUS", function(params) {
 // Send status of player to GUIManager|
 REDBRICK.Signal.addListener("CHECK_PLAYER_STATUS_REQUEST", function(params) {
     REDBRICK.Signal.send("CHECK_PLAYER_STATUS_REPLY", {
-        hp: player.hp,
-        sp: player.sp,
-        level: player.level,
-        exp: player.exp,
-        maxExp: player.maxExp,
-        money: player.money 
+        hp: GLOBAL.player.hp,
+        sp: GLOBAL.player.sp,
+        level: GLOBAL.player.level,
+        exp: GLOBAL.player.exp,
+        maxExp: GLOBAL.player.maxExp,
+        money: GLOBAL.player.money 
     });
 })
 
