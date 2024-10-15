@@ -15,7 +15,8 @@ class Enemy{
         this.dropExp = dropExp;
     }
     update(dt, enemyList) {
-        const direction = new THREE.Vector3().subVectors(new THREE.Vector3(this.player.position.x, this.object.position.y, this.player.position.z), this.object.position);
+        const direction = new THREE.Vector3().subVectors(this.player.position, this.object.position);
+        direction.y = 0;
 
         if (direction.length() > 0.1) {
             direction.normalize();
@@ -42,13 +43,14 @@ class Enemy{
     }
 
     dispose() {
-        this.object.removeFromParent();
+        //this.object.removeFromParent();
+        WORLD.remove(this.object);
     }
 }
 
 const enemyList = [];
 let damage = 50;
-GLOBAL.enemyNowCount = 0;
+GLOBAL.playerKillCount = 0;
 GLOBAL.enemyMaxCount = 10;
 
 function Start(){
