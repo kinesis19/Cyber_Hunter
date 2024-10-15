@@ -1,0 +1,1 @@
+GLOBAL.ground = WORLD.getObject("Ground");

@@ -1,14 +1,14 @@
 let previousPosition = null;
-const ground = WORLD.getObject("Ground");
 const controlAreaSize = 10; // 플레이어의 구역 (해당 구역을 넘어서면 ground 오브젝트가 이동됨).
 const moveDistance = 2; // ground 오브젝트의 이동 간격.
 
 let player;
 
 class Player {
-    constructor(hp = 10, sp = 10, level = 0, exp = 0, maxExp = 10, money = 0) {
+    constructor(hp = 10, sp = 10, atk = 5, level = 0, exp = 0, maxExp = 10, money = 0) {
         this.hp = hp;
         this.sp = sp;
+        this.atk = atk;
         this.level = level;
         this.exp = exp;
         this.maxExp = maxExp;
@@ -60,17 +60,10 @@ function Start() {
     // 플레이어의 시작 좌표를 복사함 -> 플레이어의 이동 방향을 알아내기 위함.
     previousPosition = PLAYER.position.clone();
 
-    GLOBAL.player = new Player(10, 10, 0, 0, 10, 100);
+    GLOBAL.player = new Player(10, 10, 5, 0, 0, 10, 100);
 }
 
-
-REDBRICK.Signal.addListener("CHECK_PLAYER_STATUS", function(params) {
-    if(params.action == "addExp"){
-        GLOBAL.player.addExp(params.amount);
-    }
-})
-
-function Update(dt) {
-    ground.position.set(PLAYER.position.x, 0, PLAYER.position.z);
-    ground.body.needUpdate = true;
-}
+// function Update(dt) {
+//     GLOBAL.ground.position.set(PLAYER.position.x, 0, PLAYER.position.z);
+//     GLOBAL.ground.body.needUpdate = true;
+// }

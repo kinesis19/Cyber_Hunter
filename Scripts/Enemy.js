@@ -1,10 +1,10 @@
 class Enemy{
-    constructor(object, player, dropExp){
+    constructor(object, player, hp, dmg, dropExp){
         this.object = object;
         this.player = player;
         
         // Enemy Health
-        this.health = 100;
+        this.health = hp;
         // Enemy move Vector
         this.moveVector = new THREE.Vector3();
         // Enemy move speed
@@ -12,6 +12,8 @@ class Enemy{
         // Define the radius for collision
         this.radius = 1; // 각 적의 반경을 설정.
 
+        this.damage = dmg;
+        
         this.dropExp = dropExp;
     }
     update(dt, enemyList) {
@@ -49,9 +51,6 @@ class Enemy{
 }
 
 const enemyList = [];
-let damage = 50;
-// GLOBAL.playerKillCount = 0;
-// GLOBAL.enemyMaxCount = 10;
 
 function Start(){
     REDBRICK.Signal.addListener("CHECK_ENEMY_HIT", function(params) {
@@ -60,13 +59,12 @@ function Start(){
             
             if(dist < 5){
                 params.bullet.life = 0;
-                enemyList[i].health -= damage;
+                enemyList[i].health -= GLOBAL.player.atk;
             }
             if(enemyList[i].health <= 0){ // Enemy 사망 처리하기.
                 GLOBAL.playerKillCount = GLOBAL.playerKillCount + 1;
                 GLOBAL.player.addExp(enemyList[i].dropExp);
-
-                // REDBRICK.Signal.send("CHECK_PLAYER_STATUS_REQUEST");
+                
                 REDBRICK.Signal.send("UPDATE_NEXT_ROUND");
 
                 enemyList[i].dispose();
@@ -107,8 +105,6 @@ function Update(dt){
     }
     if(GLOBAL.playerKillCount == GLOBAL.enemyMaxCount && GLOBAL.isRoundClear){
         GLOBAL.isRoundClear = false;
-        // Temp Disable
-        //REDBRICK.Signal.send("CHECK_NEXT_ROUND");
     }
     
 }
@@ -136,6 +132,6 @@ function spawnEnemyRandomly() {
     clone.position.set(x, y, z);
     WORLD.add(clone);
 
-    const enemy = new Enemy(clone, PLAYER, 1);
+    const enemy = new Enemy(clone, PLAYER, 10, 5, 1);
     enemyList.push(enemy);
 }

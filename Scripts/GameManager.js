@@ -16,12 +16,18 @@ function Start(){
 
 // Using the Update Method to Update GUI
 function Update(dt){
+
+    // GUI Update
     // GLOBAL.guiBoardEnemyCnt.setText("Enemy : " + GLOBAL.playerKillCount + " / " + GLOBAL.enemyMaxCount);
     // Need to Changing the text and show
     GLOBAL.guiBoardEnemyCnt.setText("Enemy Killed: " + GLOBAL.playerKillCount);
     GLOBAL.guiBoardStage.setText("Round : " + GLOBAL.gameRound);
     GLOBAL.guiProgressBarFront.size.x.value = GLOBAL.player.exp / GLOBAL.player.maxExp * GLOBAL.MAX_LENGTH_PB_FRONT;
     GLOBAL.guiLevel.setText("Lv." + GLOBAL.player.level + "\n\n" + "(exp: " + GLOBAL.player.exp + "/" + GLOBAL.player.maxExp + ")");
+
+    // Obj Update
+    GLOBAL.ground.position.set(PLAYER.position.x, 0, PLAYER.position.z);
+    GLOBAL.ground.body.needUpdate = true;
 }
 
 REDBRICK.Signal.addListener("UPDATE_NEXT_ROUND", function(params) {
