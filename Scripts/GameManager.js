@@ -8,23 +8,16 @@ GLOBAL.enemyMaxCount = 10;
 
 let frameCount = 0;
 
-
-function Start(){
-
-}
-
-// Using the Update Method to Update GUI
-function Update(dt){
-
+const guiUpdate = (dt) => { 
     // GUI Update
     GLOBAL.guiBoardEnemyCnt.setText("Kill: " + GLOBAL.playerKillCount);
     GLOBAL.guiBoardStage.setText("Round : " + GLOBAL.gameRound);
     GLOBAL.guiProgressBarFront.size.x.value = GLOBAL.player.exp / GLOBAL.player.maxExp * GLOBAL.MAX_LENGTH_PB_FRONT;
     GLOBAL.guiLevel.setText("Lv." + GLOBAL.player.level + "\n\n" + "(exp: " + GLOBAL.player.exp + "/" + GLOBAL.player.maxExp + ")");
+}
 
-    // Obj Update
-    GLOBAL.ground.position.set(PLAYER.position.x, 0, PLAYER.position.z);
-    GLOBAL.ground.body.needUpdate = true;
+
+const enemyUpdate = (dt) => { 
 
     // Enemy Update
     // Update enemies every frame
@@ -54,6 +47,28 @@ function Update(dt){
     }
 
     frameCount++; // Add frameCount
+
+}
+
+
+
+const objUpdate = (dt) => { 
+    // Obj Update
+    GLOBAL.ground.position.set(PLAYER.position.x, 0, PLAYER.position.z);
+    GLOBAL.ground.body.needUpdate = true;
+}
+
+
+
+function Start(){
+
+}
+
+// Using the Update Method to Update GUI
+function Update(dt){
+    guiUpdate(dt);
+    enemyUpdate(dt);
+    objUpdate(dt);
 }
 
 
