@@ -14,6 +14,7 @@ const guiUpdate = (dt) => {
     GLOBAL.guiBoardStage.setText("Round : " + GLOBAL.gameRound);
     GLOBAL.guiProgressBarFront.size.x.value = GLOBAL.player.exp / GLOBAL.player.maxExp * GLOBAL.MAX_LENGTH_PB_FRONT;
     GLOBAL.guiLevel.setText("Lv." + GLOBAL.player.level + "\n\n" + "(exp: " + GLOBAL.player.exp + "/" + GLOBAL.player.maxExp + ")");
+    GLOBAL.guiHp.setText("hp: " + GLOBAL.player.hp);
 }
 
 
@@ -52,8 +53,12 @@ const enemyUpdate = (dt) => {
 
 
 
-const objUpdate = (dt) => { 
-    // Obj Update
+const playerUpdate = (dt) => { 
+    // Player Update
+    GLOBAL.player.detectEnemies(GLOBAL.enemyList);
+
+
+    // Player's Obj Update
     GLOBAL.ground.position.set(PLAYER.position.x, 0, PLAYER.position.z);
     GLOBAL.ground.body.needUpdate = true;
 }
@@ -68,12 +73,13 @@ function Start(){
 function Update(dt){
     guiUpdate(dt);
     enemyUpdate(dt);
-    objUpdate(dt);
+    playerUpdate(dt);
 }
 
 
 REDBRICK.Signal.addListener("UPDATE_NEXT_ROUND", function(params) {
     if(GLOBAL.playerKillCount == GLOBAL.enemyMaxCount){
         GLOBAL.gameRound++;
+        frameCount = 0;
     }
 })

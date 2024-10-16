@@ -13,7 +13,30 @@ class Player {
         this.exp = exp;
         this.maxExp = maxExp;
         this.money = money;
+        this.dist = 2;
+
         this.MAX_MONEY = 999;
+
+
+        this.lastHitTime = 0; // init: 0
+        this.hitCooldown = 2000; // CoolTime: (2000ms)
+    }
+
+    detectEnemies(enemyList) {
+        const currentTime = Date.now(); // 현재 시간을 밀리초로 가져옴
+
+        for (let i = 0; i < enemyList.length; i++) {
+            const enemy = enemyList[i];
+            const distance = PLAYER.position.distanceTo(enemy.object.position);
+
+            if (distance < this.dist) {
+                // Check take damage Cool Time
+                if (currentTime - this.lastHitTime >= this.hitCooldown) {
+                    this.takeDamage(enemyList[i].damage);
+                    this.lastHitTime = currentTime; // Update Time
+                }
+            }
+        }
     }
 
     // Methods to modify player's stats
@@ -52,6 +75,7 @@ class Player {
     levelUp(){
         this.level = this.level + 1;
     }
+
 }
 
 
