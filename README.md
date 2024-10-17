@@ -44,6 +44,10 @@ W, A, S, D 키로 캐릭터를 이동합니다.
 - 레벨업 시 무기와 스탯을 업그레이드할 수 있습니다.
 - 레벨업을 통해 더 강해져서 가상 세계에서 살아남으세요!
 
+#### 목표
+- 다양한 스킬과 무기를 조합하여 전략적으로 플레이하세요.
+- 최대한 오래 생존해 높은 점수를 기록하세요!
+
 
 <!-- English Ver. -->
 <!-- ### How to Play
@@ -54,4 +58,8 @@ Move your character with the W, A, S, and D keys.
 - Eliminate the incoming viruses to stay alive.
 - Earn experience and money for eliminating viruses.
 - When you level up, you can upgrade your weapons and stats.
-- Level up to become stronger and survive in the virtual world! -->
+- Level up to become stronger and survive in the virtual world!
+
+#### Goals
+- Play strategically using different combinations of skills and weapons.
+- Survive as long as possible to get a high score! -->
