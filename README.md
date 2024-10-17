@@ -33,3 +33,25 @@ Developer: **[Kinesis](https://github.com/kinesis19)(Creator)**
 
 ## 프로젝트 소개
 
+<!-- 한국어 버전. -->
+### 플레이 방법
+#### 이동
+W, A, S, D 키로 캐릭터를 이동합니다.
+
+#### 기본 정보
+- 몰려오는 바이러스를 제거해서 살아남으세요.
+- 바이러스를 제거하면 경험치와 재화를 획득합니다.
+- 레벨업 시 무기와 스탯을 업그레이드할 수 있습니다.
+- 레벨업을 통해 더 강해져서 가상 세계에서 살아남으세요!
+
+
+<!-- English Ver. -->
+<!-- ### How to Play
+#### CONTROLS
+Move your character with the W, A, S, and D keys.
+
+#### BASIC INFORMATION
+- Eliminate the incoming viruses to stay alive.
+- Earn experience and money for eliminating viruses.
+- When you level up, you can upgrade your weapons and stats.
+- Level up to become stronger and survive in the virtual world! -->
