@@ -50,6 +50,8 @@ class Enemy{
 }
 
 GLOBAL.enemyList = [];
+let spawnInterval = null; // Save spawn Interval ID
+let listenersInitialized = false; // Check listener is Initialized
 
 function Start(){
     REDBRICK.Signal.addListener("CHECK_ENEMY_HIT", function(params) {
@@ -74,15 +76,41 @@ function Start(){
             }
         }
     })
-    
-    setInterval(() => {
 
-        // Temp Debugging: Loop Respawn -> Need to changing Object pooling
+    setupSignalListeners(); // Setup Signal Listeners 
+    startEnemySpawn(); // Start Enemy spawn
+}
+
+
+function setupSignalListeners() {
+    if (listenersInitialized) return;
+
+    REDBRICK.Signal.addListener("GAME_RESTART", () => {
+        stopEnemySpawn();
+        resetPlayerState();
+        PLAYER.changePlayerSpeed(1);
+        startEnemySpawn();
+    });
+
+    listenersInitialized = true;
+}
+
+function startEnemySpawn() {
+    spawnInterval = setInterval(() => {
+        if (GLOBAL.player.hp <= 0) {
+            PLAYER.changePlayerSpeed(0);
+            stopEnemySpawn();
+            return;
+        }
         spawnEnemyRandomly();
-        // if (GLOBAL.playerKillCount < GLOBAL.enemyMaxCount) {
-        //     spawnEnemyRandomly();
-        // }
     }, GLOBAL.mobSpawnSpeed);
+}
+
+function stopEnemySpawn() {
+    if (spawnInterval) {
+        clearInterval(spawnInterval);
+        spawnInterval = null;
+    }
 }
 
 
