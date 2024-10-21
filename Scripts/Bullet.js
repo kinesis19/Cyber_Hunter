@@ -1,47 +1,64 @@
-class Bullet{
-    constructor(player, gunObject, bulletSize){
+class Bullet {
+    constructor(player, gunObject, bulletSize) {
         this.player = player;
         this.gunObject = gunObject;
         this.bulletSize = bulletSize;
-        // Mesh
+
+        // Mesh for the bullet
         this.object = null;
-        // velocity vector
+        // Velocity vector for movement
         this.velocity = null;
-        // life
+        // Bullet life duration
         this.life = 0.4;
+
         this.init();
     }
-    
-    init(){
+
+    init() {
+        // Create the bullet mesh
         const geometry = new THREE.BoxGeometry(this.bulletSize, this.bulletSize, this.bulletSize);
-        const material = new THREE.MeshBasicMaterial({color: 0xEF5A6F});
+        const material = new THREE.MeshBasicMaterial({ color: 0xEF5A6F });
         const bullet = new THREE.Mesh(geometry, material);
-        
+
         this.object = bullet;
-        // set position of bullet
-        this.gunObject.getWorldPosition(this.object.position);
-        
-        // set velocity vector
-        const velocityVector = new THREE.Vector3();
-        this.velocity = this.player.getWorldDirection(velocityVector);
-        
-        // add bullet to world
+
+        // Calculate the gun's current position and direction
+        const gunPosition = new THREE.Vector3();
+        const gunDirection = new THREE.Vector3();
+
+        this.gunObject.getWorldPosition(gunPosition); // Get the gun's world position
+        this.gunObject.getWorldDirection(gunDirection); // Get the gun's direction
+
+        // Add an offset to the gun's position (forward direction)
+        const offsetDistance = 2; // Distance in front of the gun
+        const spawnPosition = gunPosition.add(gunDirection.multiplyScalar(offsetDistance));
+
+        // Set the bullet's position to the calculated spawn position
+        this.object.position.copy(spawnPosition);
+
+        // Set the bullet's velocity in the same direction as the gun's direction
+        this.velocity = gunDirection.clone().multiplyScalar(0.5); // Adjust speed
+
+        // Add the bullet to the world
         WORLD.add(this.object);
     }
-    
-    update(dt){
-        if(!this.object || !this.velocity){
-            return;
-        }else{
-            this.object.position.add(this.velocity);
-            this.life -= dt;
-            
-            if(this.life < 0){
-                this.object.removeFromParent();
-            }
+
+    update(dt) {
+        if (!this.object || !this.velocity) return;
+
+        // Move the bullet according to its velocity
+        this.object.position.add(this.velocity);
+
+        // Decrease bullet life over time
+        this.life -= dt;
+
+        // Remove the bullet if its life runs out
+        if (this.life < 0) {
+            this.object.removeFromParent();
         }
     }
 }
+
 
 let bulletSize = 1;
 const bullets = [];
