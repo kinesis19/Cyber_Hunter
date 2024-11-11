@@ -35,7 +35,7 @@ class Bullet {
         this.object.quaternion.copy(PLAYER.quaternion);
 
         // 총알의 이동 방향 설정
-        this.velocity = gunDirection.clone().multiplyScalar(0.25);
+        this.velocity = gunDirection.clone().multiplyScalar(0.5);
 
         // 복제된 Bullet을 WORLD에 추가
         WORLD.add(this.object);
@@ -71,6 +71,12 @@ const fireProjectile = () => {
     // Bullet 생성 시 bulletTemplate 전달
     const bullet = new Bullet(PLAYER, gunObject, bulletSize, GLOBAL.bulletTemplate);
     bullets.push(bullet);
+    
+    // 총알이 생성될 때 소리를 강제로 다시 재생
+    if (GLOBAL.sfxGunFire.isPlaying) {
+        GLOBAL.sfxGunFire.stop(); // 현재 재생 중이면 중지
+    }
+    GLOBAL.sfxGunFire.play(); // 소리 재생
 };
 
 // Bullet 타이머 시작
@@ -133,7 +139,6 @@ function Update(dt){
     // Lobby일 때는 미 실행
     // if(GLOBAL.isLobby == true) return;
     for(let i = 0; i < bullets.length; i++){
-        GLOBAL.sfxGunFire.play();
         bullets[i].update(dt);
         
         if(bullets[i].life < 0){

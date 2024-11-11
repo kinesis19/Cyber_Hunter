@@ -113,6 +113,7 @@ function Start(){
 
     GLOBAL.guiBtnGameStart.onClick(() => {
         // REDBRICK.Signal.send("UPDATE_CHECK_INGAME", GLOBAL.isLobby);
+        GLOBAL.bgmLobby.stop();
         console.log("CCC");
         GLOBAL.isLobby = false;
         GLOBAL.isGameStart = true;
@@ -127,17 +128,20 @@ function Start(){
 
 // Using the Update Method to Update GUI
 function Update(dt){
+    // Lobby
     console.log(GLOBAL.isLobby);
     // Lobby일 때는 미실행
     if(GLOBAL.isLobby == true){
+        GLOBAL.bgmLobby.play();
         GLOBAL.guiBoardKill.setText(" ");
         PLAYER.changePlayerSpeed(0);
         return;
     } 
-
+    // InGame
     guiUpdate(dt);
     enemyUpdate(dt);
     playerUpdate(dt);
+    GLOBAL.bgmInGame.play();
 }
 
 // Skill Select or Upgrade
@@ -168,26 +172,27 @@ REDBRICK.Signal.addListener("UPDATE_NEXT_ROUND", function(params) {
         GLOBAL.enemyHp += 5;
     } else if(GLOBAL.player.level == 2){
         GLOBAL.player.maxExp += 10;
-        GLOBAL.mobSpawnSpeed = GLOBAL.mobSpawnSpeed + 1000;
+        GLOBAL.mobSpawnSpeed = 2000;
         GLOBAL.gameRound++;
         GLOBAL.enemyHp += 10;
     }else if(GLOBAL.player.level == 5){
         GLOBAL.player.maxExp += 10;
-        GLOBAL.mobSpawnSpeed = GLOBAL.mobSpawnSpeed + 1000;
+        GLOBAL.mobSpawnSpeed = 1500;
         GLOBAL.gameRound++;
         GLOBAL.enemyHp += 15;
     }else if(GLOBAL.player.level == 7){
         GLOBAL.player.maxExp += 10;
-        GLOBAL.mobSpawnSpeed = GLOBAL.mobSpawnSpeed + 1000;
+        GLOBAL.mobSpawnSpeed = 1000;
         GLOBAL.gameRound++;
         GLOBAL.enemyHp += 20;
     }else if(GLOBAL.player.level == 10){
         GLOBAL.player.maxExp += 10;
-        GLOBAL.mobSpawnSpeed = GLOBAL.mobSpawnSpeed + 1000;
+        GLOBAL.mobSpawnSpeed = 500;
         GLOBAL.gameRound++;
         GLOBAL.enemyHp += 25;
     }else{ // 인피니티
         GLOBAL.player.maxExp += 100;
         GLOBAL.enemyHp += 30;
+        GLOBAL.mobSpawnSpeed = 250;
     }
 });

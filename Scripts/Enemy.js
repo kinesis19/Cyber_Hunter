@@ -63,6 +63,10 @@ function Start(){
             const dist = GLOBAL.enemyList[i].object.position.distanceTo(params.bullet.object.position);
             
             if(dist < 5){
+                // 생성될 때 소리를 강제로 다시 재생
+                if (GLOBAL.sfxBulletHit.isPlaying) {
+                    GLOBAL.sfxBulletHit.stop(); // 현재 재생 중이면 중지
+                }
                 GLOBAL.sfxBulletHit.play();
                 params.bullet.life = 0;
                 GLOBAL.enemyList[i].health -= GLOBAL.player.atk;
