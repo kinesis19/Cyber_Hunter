@@ -2,7 +2,6 @@ GLOBAL.MAX_LENGTH_PLAYER_LV_PB_FRONT = 11;
 GLOBAL.MAX_LENGTH_PLAYER_HP_PB_FRONT = 11;
 
 // InGame-Others
-GLOBAL.guiBoardRoundTitle = GUI.getObject("GUI_Board_Round_Title");
 GLOBAL.guiBoardKill = GUI.getObject("GUI_Board_Kill");
 GLOBAL.guiBtnPause = GUI.getObject("GUI_Btn_Pause");
 
@@ -23,6 +22,7 @@ GLOBAL.guiRound_3 = GUI.getObject("GUI_Round_3");
 GLOBAL.guiRound_4 = GUI.getObject("GUI_Round_4");
 GLOBAL.guiRound_5 = GUI.getObject("GUI_Round_5");
 GLOBAL.guiRound_Infinite = GUI.getObject("GUI_Round_Infinite");
+GLOBAL.guiBoardRoundTitle = GUI.getObject("GUI_Board_Round_Title");
 
 GLOBAL.guiBoardStatus = GUI.getObject("GUI_Status");  
 
@@ -84,7 +84,6 @@ REDBRICK.Signal.addListener("UPDATE_GUI_SETTING_FIRST", function(params) {
     GLOBAL.guiProgressBarPlayerLvBg.offset.y.value = -47;
     GLOBAL.guiProgressBarPlayerLvBg.size.x.value = 11;
     GLOBAL.guiProgressBarPlayerLvBg.size.y.value = 1;
-
     
     GLOBAL.guiProgressBarPlayerHp.offset.x.value = -9;
     GLOBAL.guiProgressBarPlayerHp.offset.y.value = -44;
@@ -95,6 +94,49 @@ REDBRICK.Signal.addListener("UPDATE_GUI_SETTING_FIRST", function(params) {
     GLOBAL.guiProgressBarPlayerLv.offset.y.value = -47;
     GLOBAL.guiProgressBarPlayerLv.size.x.value = 11;
     GLOBAL.guiProgressBarPlayerLv.size.y.value = 1;
+
+    // Top
+
+    GLOBAL.guiBtnPause.offset.x.value = -46;
+    GLOBAL.guiBtnPause.offset.y.value = -45;
+    GLOBAL.guiBtnPause.size.x.value = 4.5;
+    GLOBAL.guiBtnPause.size.y.value = 8;
+
+    GLOBAL.guiBoardRoundTitle.offset.x.value = -5;
+    GLOBAL.guiBoardRoundTitle.offset.y.value = 45;
+    GLOBAL.guiBoardRoundTitle.size.x.value = 18;
+    GLOBAL.guiBoardRoundTitle.size.y.value = 5;
+    
+    GLOBAL.guiRound_1.offset.x.value = 5;
+    GLOBAL.guiRound_1.offset.y.value = 45;
+    GLOBAL.guiRound_1.size.x.value = 5;
+    GLOBAL.guiRound_1.size.y.value = 5;
+    
+    GLOBAL.guiRound_2.offset.x.value = 5;
+    GLOBAL.guiRound_2.offset.y.value = 45;
+    GLOBAL.guiRound_2.size.x.value = 5;
+    GLOBAL.guiRound_2.size.y.value = 5;
+
+    GLOBAL.guiRound_3.offset.x.value = 5;
+    GLOBAL.guiRound_3.offset.y.value = 45;
+    GLOBAL.guiRound_3.size.x.value = 5;
+    GLOBAL.guiRound_3.size.y.value = 5;
+    
+    GLOBAL.guiRound_4.offset.x.value = 5;
+    GLOBAL.guiRound_4.offset.y.value = 45;
+    GLOBAL.guiRound_4.size.x.value = 5;
+    GLOBAL.guiRound_4.size.y.value = 5;
+    
+    GLOBAL.guiRound_5.offset.x.value = 5;
+    GLOBAL.guiRound_5.offset.y.value = 45;
+    GLOBAL.guiRound_5.size.x.value = 5;
+    GLOBAL.guiRound_5.size.y.value = 5;
+
+    GLOBAL.guiRound_Infinite.offset.x.value = 5;
+    GLOBAL.guiRound_Infinite.offset.y.value = 45;
+    GLOBAL.guiRound_Infinite.size.x.value = 5;
+    GLOBAL.guiRound_Infinite.size.y.value = 5;
+
 
     GLOBAL.guiBoardSkillSelect.hide();
     GLOBAL.guiBtnSkillSpeed.hide();
