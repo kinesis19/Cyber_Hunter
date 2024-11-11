@@ -136,7 +136,7 @@ function stopEnemySpawn() {
 }
 
 
-const enemyObject = WORLD.getObject("Enemy");
+const enemyObject = WORLD.getObject("EnemyRobot");
 
 function spawnEnemyRandomly() {
     const areas = {

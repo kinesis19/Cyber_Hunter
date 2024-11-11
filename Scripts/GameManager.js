@@ -135,6 +135,7 @@ function Update(dt){
         GLOBAL.bgmLobby.play();
         GLOBAL.guiBoardKill.setText(" ");
         PLAYER.changePlayerSpeed(0);
+        PLAYER.changePlayerJumpHeight(0);
         return;
     } 
     // InGame
