@@ -5,14 +5,19 @@ const moveDistance = 2; // ground Moving distance
 GLOBAL.player;
 
 class Player {
-    constructor(hp = 10, sp = 10, atk = 5, level = 0, exp = 0, maxExp = 10, money = 0) {
-        this.hp = hp;
+    constructor(maxHp = 10, nowHp = 10, sp = 10, atk = 2, level = 0, exp = 0, maxExp = 10, money = 0, speed = 1, speedLv = 0, bulletLv = 0, hpLv = 0) {
+        this.maxHp = maxHp;
+        this.nowHp = nowHp;
         this.sp = sp;
         this.atk = atk;
         this.level = level;
         this.exp = exp;
         this.maxExp = maxExp;
         this.money = money;
+        this.speed = speed;
+        this.speedLv = speedLv;
+        this.bulletLv = bulletLv;
+        this.hpLv = hpLv;
         this.dist = 2;
 
         this.MAX_MONEY = 999;
@@ -60,9 +65,10 @@ class Player {
     }
 
     takeDamage(damage) {
-        this.hp -= damage;
-        if (this.hp < 0){
-            this.hp = 0;
+        this.nowHp -= damage;
+        if (this.nowHp < 0){
+            this.nowHp = 0;
+            GLOBAL.isPaused = true;
         }
     }
 
@@ -72,8 +78,27 @@ class Player {
         }
     }
 
-    levelUp(){
+    levelUp() {
         this.level = this.level + 1;
+        
+        REDBRICK.Signal.send("UPDATE_SKILL_SELECT");
+        REDBRICK.Signal.send("UPDATE_NEXT_ROUND");
+    }
+
+    levelUpSpeed() {
+        this.speed = this.speed + 0.1;
+        this.speedLv++;
+        PLAYER.changePlayerSpeed(this.speed); // PLAYER 객체의 속도 업데이트
+    }
+
+    levelUpBullet() {
+        GLOBAL.player.atk = GLOBAL.player.atk + 2;
+        this.bulletLv++;
+    }
+
+    levelUpHp() {
+        this.maxHp = this.maxHp + 5;
+        this.hpLv++;
     }
 
 }
@@ -84,5 +109,5 @@ function Start() {
     // Clone the Player's position
     previousPosition = PLAYER.position.clone();
 
-    GLOBAL.player = new Player(10, 10, 5, 0, 0, 10, 100);
+    GLOBAL.player = new Player(10, 10, 10, 10, 0, 0, 10, 100, 1, 0, 0, 0);
 }
