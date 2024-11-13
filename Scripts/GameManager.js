@@ -54,8 +54,9 @@ const enemyUpdate = (dt) => {
 
             if ((enemyPos.x > playerPos.x + 60 || enemyPos.x < playerPos.x - 60) ||
                 (enemyPos.z > playerPos.z + 60 || enemyPos.z < playerPos.z - 60)) {
-                enemy.dispose();
+                // enemy.dispose();
                 GLOBAL.enemyList.splice(i, 1); // Enemy delete
+                WORLD.remove(enemy.object);
                 i--; // Adjusting indexes
             }
         }

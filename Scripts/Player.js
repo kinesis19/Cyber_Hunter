@@ -18,7 +18,7 @@ class Player {
         this.speedLv = speedLv;
         this.bulletLv = bulletLv;
         this.hpLv = hpLv;
-        this.dist = 2;
+        this.dist = 4;
 
         this.MAX_MONEY = 999;
 
@@ -37,9 +37,26 @@ class Player {
             if (distance < this.dist) {
                 // Check take damage Cool Time
                 if (currentTime - this.lastHitTime >= this.hitCooldown) {
+                    // GLOBAL.enemyList[i].stopMovement();
+                    GLOBAL.enemyList[i].action.stop();
+                    GLOBAL.enemyList[i].attack_action.play();
+
+                    // issue: Enemy가 공격시에는 제자리에서 멈춰서 공격하게 하고 싶은데 딜레이 되면서 마지막에 공격이 한꺼번에 몰려서 공격함.
+                    // setTimeout(() => {
+                    //     this.takeDamage(enemyList[i].damage);
+                    //     this.lastHitTime = currentTime; // Update Time
+                    //     GLOBAL.enemyList[i].resumeMovement();
+                    // }, 1000); // 1초 지연
+                    // if (!GLOBAL.enemyList[i].attack_action) {
+                    //     this.takeDamage(enemyList[i].damage);
+                    //     this.lastHitTime = currentTime;
+                    // }
                     this.takeDamage(enemyList[i].damage);
-                    this.lastHitTime = currentTime; // Update Time
+                    this.lastHitTime = currentTime;
                 }
+            } else {
+                GLOBAL.enemyList[i].action.play();
+                GLOBAL.enemyList[i].attack_action.stop();
             }
         }
     }

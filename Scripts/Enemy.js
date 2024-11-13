@@ -1,10 +1,11 @@
 class Enemy{
-    constructor(object, player, hp, dmg, dropExp){
+    constructor(object, player, hp, num, dmg, dropExp){
         this.object = object;
         this.player = player;
         
         // Enemy Health
         this.health = hp;
+        this.num = num;
         // Enemy move Vector
         this.moveVector = new THREE.Vector3();
         // Enemy move speed
@@ -15,12 +16,23 @@ class Enemy{
         this.damage = dmg;
         
         this.dropExp = dropExp;
+
+        this.is_alive = true;
+
+        this.mixer = new THREE.AnimationMixer(this.object);
+        this.action = this.mixer.clipAction(this.object.animations[1]);
+        this.death_action = this.mixer.clipAction(this.object.animations[0]);
+        this.attack_action = this.mixer.clipAction(this.object.animations[3]);
+        this.action.play();
     }
     update(dt, enemyList) {
         if (GLOBAL.isPaused) return;  // 게임이 일시 정지 상태이면 동작 중지
 
         const direction = new THREE.Vector3().subVectors(this.player.position, this.object.position);
         direction.y = 0;
+
+        // 애니메이션 재생 업데이트
+        if(this.mixer){this.mixer.update(dt);} 
 
         if (direction.length() > 0.1) {
             direction.normalize();
@@ -46,16 +58,40 @@ class Enemy{
         }
     }
 
+    // dispose() {
+    //     WORLD.remove(this.object);
+    // }
     dispose() {
-        WORLD.remove(this.object);
+        this.is_alive = false;
+        this.action.stop();
+        this.death_action.play();
+
+        // 1초 후 splice 실행
+        setTimeout(() => {
+            this.death_action.stop();
+            list_splice(this.num);
+        }, 1000); // 1초 지연
     }
 }
+
+function list_splice(num) {
+    console.log(2);
+    GLOBAL.enemyList.forEach((enemy, index) => {
+        if (enemy.num === num) {
+            WORLD.remove(enemy.object);
+            GLOBAL.enemyList.splice(index, 1);
+            return;
+        }
+    })
+}
+
 
 GLOBAL.enemyList = [];
 let spawnInterval = null; // Save spawn Interval ID
 let listenersInitialized = false; // Check listener is Initialized
 GLOBAL.isPaused = false;  // 게임 일시 정지 여부를 확인하는 변수
 GLOBAL.enemyHp = 10;
+let spawn_num = 0;
 
 function Start(){
     REDBRICK.Signal.addListener("CHECK_ENEMY_HIT", function(params) {
@@ -72,24 +108,25 @@ function Start(){
                 GLOBAL.enemyList[i].health -= GLOBAL.player.atk;
             }
             
-            // Enemy Kill Processing
-            if(GLOBAL.enemyList[i].health <= 0){ 
-                GLOBAL.sfxEnemyDie.play();
+            if (GLOBAL.enemyList[i].health <= 0 && GLOBAL.enemyList[i].is_alive) {
+                GLOBAL.enemyList[i].is_alive = false;
 
-                GLOBAL.playerKillCount = GLOBAL.playerKillCount + 1;
-                GLOBAL.player.addExp(GLOBAL.enemyList[i].dropExp);
+                // 공격 애니메이션 실행 중이면 정지
+                if (GLOBAL.enemyList[i].attack_action) {
+                    GLOBAL.enemyList[i].attack_action.stop();
+                }
+
+                GLOBAL.enemyList[i].action.stop();
+                GLOBAL.enemyList[i].death_action.play();
+                GLOBAL.sfxEnemyDie.play();
                 
-                // Check is meet the Next Game Round condition
-                // if(GLOBAL.playerKillCount == GLOBAL.enemyMaxCount){
-                //     REDBRICK.Signal.send("UPDATE_SKILL_SELECT");
-                //     REDBRICK.Signal.send("UPDATE_NEXT_ROUND");
-                // }
-                // if(GLOBAL.player.exp >= GLOBAL.player.maxExp){
-                //     GLOBAL.player.exp = 0;
-                // }
-                GLOBAL.enemyList[i].dispose();
-                GLOBAL.enemyList.splice(i, 1);
-                i--;
+                // 1초 후 dispose() 실행
+                setTimeout(() => {
+                    GLOBAL.playerKillCount += 1;
+                    GLOBAL.player.addExp(GLOBAL.enemyList[i].dropExp);
+                    GLOBAL.enemyList[i].dispose();
+                    GLOBAL.enemyList.splice(i, 1); // 배열에서 제거
+                }, 1000); // 1초 지연
             }
         }
     })
@@ -136,7 +173,7 @@ function stopEnemySpawn() {
 }
 
 
-const enemyObject = WORLD.getObject("EnemyRobot");
+const enemyObject = WORLD.getObject("robot");
 
 function spawnEnemyRandomly() {
     const areas = {
@@ -157,11 +194,18 @@ function spawnEnemyRandomly() {
 
     // const clone = enemyObject.clone();
     const clone = THREEADDON.SkeletonUtils.clone(enemyObject);
+    // const clone = THREEADDON.SkeletonUtils.clone(enemyObject);
+    enemyObject.animations.forEach((item) => {
+        clone.animations.push(item);
+    }) 
     clone.position.set(x, y, z);
     WORLD.add(clone);
 
-    const enemy = new Enemy(clone, PLAYER, GLOBAL.enemyHp, 5, 1);
+    // const enemy = new Enemy(clone, PLAYER, GLOBAL.enemyHp, 5, 1);
+    // GLOBAL.enemyList.push(enemy);
+    const enemy = new Enemy(clone, PLAYER, GLOBAL.enemyHp, spawn_num, 5, 1);
     GLOBAL.enemyList.push(enemy);
+    spawn_num++;
 }
 
 // GLOBAL.isPaused 상태에 따라 적 생성/중지를 제어하는 새로운 리스너 추가
