@@ -83,7 +83,7 @@ class Player {
 
     takeDamage(damage) {
         this.nowHp -= damage;
-        if (this.nowHp < 0){
+        if (this.nowHp <= 0){
             this.nowHp = 0;
             GLOBAL.isPaused = true;
         }

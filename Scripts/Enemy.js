@@ -34,27 +34,29 @@ class Enemy{
         // 애니메이션 재생 업데이트
         if(this.mixer){this.mixer.update(dt);} 
 
-        if (direction.length() > 0.1) {
-            direction.normalize();
-            this.moveVector.copy(direction).multiplyScalar(this.speed);
-            const newPosition = this.object.position.clone().add(this.moveVector);
-
-            // Check for potential collisions before moving
-            let collision = false;
-            for (let other of enemyList) {
-                if (other !== this && newPosition.distanceTo(other.object.position) < (this.radius + other.radius)) {
-                    collision = true;
-                    break;
+        if (this.is_alive) {
+            if (direction.length() > 0.1) {
+                direction.normalize();
+                this.moveVector.copy(direction).multiplyScalar(this.speed);
+                const newPosition = this.object.position.clone().add(this.moveVector);
+    
+                // Check for potential collisions before moving
+                let collision = false;
+                for (let other of enemyList) {
+                    if (other !== this && newPosition.distanceTo(other.object.position) < (this.radius + other.radius)) {
+                        collision = true;
+                        break;
+                    }
                 }
+    
+                if (!collision) {
+                    this.object.position.add(this.moveVector);
+                }
+    
+                // Enemy lookAt Player, But position Y is staying current position
+                const lookAtPosition = new THREE.Vector3(this.player.position.x, this.object.position.y, this.player.position.z);
+                this.object.lookAt(lookAtPosition);
             }
-
-            if (!collision) {
-                this.object.position.add(this.moveVector);
-            }
-
-            // Enemy lookAt Player, But position Y is staying current position
-            const lookAtPosition = new THREE.Vector3(this.player.position.x, this.object.position.y, this.player.position.z);
-            this.object.lookAt(lookAtPosition);
         }
     }
 
@@ -116,17 +118,12 @@ function Start(){
                     GLOBAL.enemyList[i].attack_action.stop();
                 }
 
+                GLOBAL.playerKillCount += 1;
+                GLOBAL.player.addExp(GLOBAL.enemyList[i].dropExp);
                 GLOBAL.enemyList[i].action.stop();
                 GLOBAL.enemyList[i].death_action.play();
                 GLOBAL.sfxEnemyDie.play();
-                
-                // 1초 후 dispose() 실행
-                setTimeout(() => {
-                    GLOBAL.playerKillCount += 1;
-                    GLOBAL.player.addExp(GLOBAL.enemyList[i].dropExp);
-                    GLOBAL.enemyList[i].dispose();
-                    GLOBAL.enemyList.splice(i, 1); // 배열에서 제거
-                }, 1000); // 1초 지연
+                GLOBAL.enemyList[i].dispose();
             }
         }
     })
