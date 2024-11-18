@@ -82,6 +82,12 @@ class Player {
     }
 
     takeDamage(damage) {
+
+        const worldPosition = new THREE.Vector3();
+        PLAYER.getWorldPosition(worldPosition);
+
+        GLOBAL.EFFECT.ShowEffectHitPlayer(worldPosition, 500, 60);
+
         this.nowHp -= damage;
         if (this.nowHp <= 0){
             this.nowHp = 0;

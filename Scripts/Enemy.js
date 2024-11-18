@@ -70,6 +70,11 @@ class Enemy{
         this.action.stop();
         this.death_action.play();
 
+        const worldPosition = new THREE.Vector3();
+        this.object.getWorldPosition(worldPosition);
+
+        GLOBAL.EFFECT.ShowEffectDieEnemy(worldPosition, 500, 60);
+
         // 1초 후 splice 실행
         setTimeout(() => {
             this.death_action.stop();
