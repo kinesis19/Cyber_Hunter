@@ -106,6 +106,13 @@ class Player {
         
         REDBRICK.Signal.send("UPDATE_SKILL_SELECT");
         REDBRICK.Signal.send("UPDATE_NEXT_ROUND");
+
+
+        const pos = new THREE.Vector2();
+        pos.x = (window.innerWidth/2);
+        pos.y = -(window.innerHeight/2);
+
+        GLOBAL.EFFECT.ShowEffectLevelUp(pos, 25, 60);
     }
 
     levelUpSpeed() {

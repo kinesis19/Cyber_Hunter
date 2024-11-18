@@ -3,6 +3,8 @@ const camera = WORLD.getObject("MainCamera");
 let hitImgsEnemy = [];
 let dieImgsEnemy = [];
 let hitImgsPlayer = [];
+let levelupImgs = [];
+let skillSelectImgs = [];
 
 
 function Start() {
@@ -18,6 +20,14 @@ function Start() {
         hitImgsPlayer.push(GUI.getObject("GUI_Hit_Player_" + i));
     }
 
+    for (let i = 1; i <= 17; i++) {
+        levelupImgs.push(GUI.getObject("GUI_Levelup_" + i));
+    }
+
+    for (let i = 1; i <= 13; i++) {
+        skillSelectImgs.push(GUI.getObject("GUI_Skill_Select_" + i));
+    }
+
     // 시작하고 안 보이게 설정
     hitImgsEnemy.forEach((img) => {
         img.hide();
@@ -31,6 +41,13 @@ function Start() {
         img.hide();
     });
 
+    levelupImgs.forEach((img) => {
+        img.hide();
+    });
+
+    skillSelectImgs.forEach((img) => {
+        img.hide();
+    });
 }
 
 function ShowEffectHitEnemy(pos, size, durationTime) {
@@ -112,8 +129,64 @@ function ShowEffectHitPlayer(pos, size, durationTime) {
     }, durationTime);
 }
 
+function ShowEffectLevelUp(pos, size, durationTime) {
+    
+    // 이펙터 이미지 위치와 사이즈 조정.
+    levelupImgs.forEach((img) => {
+        img.size.x.value = size;
+    });
+
+    let num = 0;
+    // 짧은 시간동안 돌면서 보여줄 이미지를 변경함.
+    let startCountDieEnemy = setInterval(() => {
+
+        // 화면 좌표로 변환
+        const screenPosition = pos.clone().project(camera);
+        if (num >= levelupImgs.length) {
+            levelupImgs[num - 1].hide();
+            clearInterval(startCountHitEnemy);
+        }
+
+        if (num !== 0) levelupImgs[num - 1].hide();
+        if (levelupImgs[num]) levelupImgs[num].show();
+        levelupImgs[num].offset.x.value = (screenPosition.x * 0.5) * window.innerWidth;
+        levelupImgs[num].offset.y.value = (screenPosition.y * 0.5) * window.innerHeight;
+        num++;
+    }, durationTime);
+}
+
+
+function ShowEffectSkillSelect(pos, size, durationTime) {
+    
+    // 이펙터 이미지 위치와 사이즈 조정.
+    skillSelectImgs.forEach((img) => {
+        img.size.x.value = size;
+        img.offset.x.value = pos.x;
+        img.offset.y.value = pos.y;
+    });
+
+    let num = 0;
+    // 짧은 시간동안 돌면서 보여줄 이미지를 변경함.
+    let startCountDieEnemy = setInterval(() => {
+
+        // 화면 좌표로 변환
+        const screenPosition = pos.clone().project(camera);
+        if (num >= skillSelectImgs.length) {
+            skillSelectImgs[num - 1].hide();
+            clearInterval(startCountHitEnemy);
+        }
+
+        if (num !== 0) skillSelectImgs[num - 1].hide();
+        if (skillSelectImgs[num]) skillSelectImgs[num].show();
+        skillSelectImgs[num].offset.x.value = (screenPosition.x * 0.5) * window.innerWidth;
+        skillSelectImgs[num].offset.y.value = (screenPosition.y * 0.5) * window.innerHeight;
+        num++;
+    }, durationTime);
+}
 
 GLOBAL.EFFECT = {};
 GLOBAL.EFFECT.ShowEffectDieEnemy = ShowEffectDieEnemy;
 GLOBAL.EFFECT.ShowEffectHitEnemy = ShowEffectHitEnemy;
 GLOBAL.EFFECT.ShowEffectHitPlayer = ShowEffectHitPlayer;
+GLOBAL.EFFECT.ShowEffectLevelUp = ShowEffectLevelUp;
+GLOBAL.EFFECT.ShowEffectSkillSelect = ShowEffectSkillSelect;

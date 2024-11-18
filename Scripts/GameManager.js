@@ -125,6 +125,19 @@ function Start(){
 }
 
 
+function OnPointerDown(event){
+    if(event.button === 0){
+        const pos = new THREE.Vector2();
+        pos.x = (event.x - window.innerWidth/2 );
+        pos.y = -(event.y - window.innerHeight/2);
+        
+        // pos : 이펙터 재생시킬 위치
+        // 25 : 이펙터 사이즈
+        // 70 : 이펙터 재생 속도
+        GLOBAL.EFFECT.ShowEffectSkillSelect(pos, 25, 70); 
+    }
+}
+
 
 
 // Using the Update Method to Update GUI
