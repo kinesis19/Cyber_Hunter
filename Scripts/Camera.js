@@ -1,5 +1,5 @@
 // //카메라가 플레이어 위치로부터 떨어진 거리, 로테이션 값
-const CAMERA_POSITION_WEIGHT_Y = 40; 
+const CAMERA_POSITION_WEIGHT_Y = 80; 
 const CAMERA_ROTATION_X = -90;
 const CAMERA_ROTATION_Z = 0;
 

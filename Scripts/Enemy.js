@@ -1,3 +1,5 @@
+const camera = WORLD.getObject("MainCamera");
+
 class Enemy{
     constructor(object, player, hp, num, dmg, dropExp){
         this.object = object;
@@ -100,7 +102,7 @@ function Start(){
         for(let i = 0; i < GLOBAL.enemyList.length; i++){
             const dist = GLOBAL.enemyList[i].object.position.distanceTo(params.bullet.object.position);
             
-            if(dist < 5){
+            if(dist < 5 && GLOBAL.enemyList[i].is_alive){
                 // 생성될 때 소리를 강제로 다시 재생
                 if (GLOBAL.sfxBulletHit.isPlaying) {
                     GLOBAL.sfxBulletHit.stop(); // 현재 재생 중이면 중지
@@ -108,6 +110,11 @@ function Start(){
                 GLOBAL.sfxBulletHit.play();
                 params.bullet.life = 0;
                 GLOBAL.enemyList[i].health -= GLOBAL.player.atk;
+
+                const hitworldPosition = new THREE.Vector3();
+                GLOBAL.enemyList[i].object.getWorldPosition(hitworldPosition);
+
+                GLOBAL.EFFECT.ShowEffectHitEnemy(hitworldPosition, 500, 60);
             }
             
             if (GLOBAL.enemyList[i].health <= 0 && GLOBAL.enemyList[i].is_alive) {
