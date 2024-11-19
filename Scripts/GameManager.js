@@ -94,18 +94,36 @@ function Start(){
         REDBRICK.Signal.send("UPDATE_TOGGLE_PAUSE");
         GLOBAL.player.levelUpSpeed();
         hideSkillSelectGUI();
+
+        let pos = new THREE.Vector2();
+        pos.x = GLOBAL.guiBtnSkillSpeed.offset.x.value;
+        pos.y = GLOBAL.guiBtnSkillSpeed.offset.y.value;
+
+        GLOBAL.EFFECT.ShowEffectSkillSelect(pos, 500, 70);
     });
 
     GLOBAL.guiBtnSkillBullet.onClick(() => {
         REDBRICK.Signal.send("UPDATE_TOGGLE_PAUSE");
         GLOBAL.player.levelUpBullet();
         hideSkillSelectGUI();
+
+        let pos = new THREE.Vector2();
+        pos.x = GLOBAL.guiBtnSkillBullet.offset.x.value;
+        pos.y = GLOBAL.guiBtnSkillBullet.offset.y.value;
+
+        GLOBAL.EFFECT.ShowEffectSkillSelect(pos, 500, 70);
     });
 
     GLOBAL.guiBtnSkillHp.onClick(() => {
         REDBRICK.Signal.send("UPDATE_TOGGLE_PAUSE");
         GLOBAL.player.levelUpHp();
         hideSkillSelectGUI();
+
+        let pos = new THREE.Vector2();
+        pos.x = GLOBAL.guiBtnSkillHp.offset.x.value;
+        pos.y = GLOBAL.guiBtnSkillHp.offset.y.value;
+
+        GLOBAL.EFFECT.ShowEffectSkillSelect(pos, 500, 70);
     });
 
     GLOBAL.guiBtnPause.onClick(() => {
@@ -123,22 +141,6 @@ function Start(){
         PLAYER.changePlayerSpeed(GLOBAL.player.speed);
     });
 }
-
-
-function OnPointerDown(event){
-    if(event.button === 0){
-        const pos = new THREE.Vector2();
-        pos.x = (event.x - window.innerWidth/2 );
-        pos.y = -(event.y - window.innerHeight/2);
-        
-        // pos : 이펙터 재생시킬 위치
-        // 25 : 이펙터 사이즈
-        // 70 : 이펙터 재생 속도
-        GLOBAL.EFFECT.ShowEffectSkillSelect(pos, 25, 70); 
-    }
-}
-
-
 
 // Using the Update Method to Update GUI
 function Update(dt){

@@ -149,8 +149,8 @@ function ShowEffectLevelUp(pos, size, durationTime) {
 
         if (num !== 0) levelupImgs[num - 1].hide();
         if (levelupImgs[num]) levelupImgs[num].show();
-        levelupImgs[num].offset.x.value = (screenPosition.x * 0.5) * window.innerWidth;
-        levelupImgs[num].offset.y.value = (screenPosition.y * 0.5) * window.innerHeight;
+        levelupImgs[num].offset.x.value = (screenPosition.x * 0.5) * window.innerWidth - 650;
+        levelupImgs[num].offset.y.value = (screenPosition.y * 0.5) * window.innerHeight + 450;
         num++;
     }, durationTime);
 }
@@ -161,7 +161,7 @@ function ShowEffectSkillSelect(pos, size, durationTime) {
     // 이펙터 이미지 위치와 사이즈 조정.
     skillSelectImgs.forEach((img) => {
         img.size.x.value = size;
-        img.offset.x.value = pos.x;
+        img.offset.x.value = pos.x; // GUI 위치는 고정이므로 스킬 획득 이펙트도 고정
         img.offset.y.value = pos.y;
     });
 
@@ -170,7 +170,6 @@ function ShowEffectSkillSelect(pos, size, durationTime) {
     let startCountDieEnemy = setInterval(() => {
 
         // 화면 좌표로 변환
-        const screenPosition = pos.clone().project(camera);
         if (num >= skillSelectImgs.length) {
             skillSelectImgs[num - 1].hide();
             clearInterval(startCountHitEnemy);
@@ -178,8 +177,6 @@ function ShowEffectSkillSelect(pos, size, durationTime) {
 
         if (num !== 0) skillSelectImgs[num - 1].hide();
         if (skillSelectImgs[num]) skillSelectImgs[num].show();
-        skillSelectImgs[num].offset.x.value = (screenPosition.x * 0.5) * window.innerWidth;
-        skillSelectImgs[num].offset.y.value = (screenPosition.y * 0.5) * window.innerHeight;
         num++;
     }, durationTime);
 }
