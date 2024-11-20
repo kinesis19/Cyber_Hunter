@@ -141,7 +141,7 @@ function Start(){
     })
 
     setupSignalListeners(); // Setup Signal Listeners 
-    startEnemySpawn(); // Start Enemy spawn
+    // startEnemySpawn(); // Start Enemy spawn (GameStart 버튼으로 처리 작업 중)
 }
 
 
@@ -181,6 +181,8 @@ function stopEnemySpawn() {
     }
 }
 
+GLOBAL.fnStopEnemySpawn = stopEnemySpawn;
+GLOBAL.fnStartEnemySpawn = startEnemySpawn;
 
 const enemyObject = WORLD.getObject("robot");
 

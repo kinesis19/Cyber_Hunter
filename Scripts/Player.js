@@ -92,6 +92,8 @@ class Player {
         if (this.nowHp <= 0){
             this.nowHp = 0;
             GLOBAL.isPaused = true;
+            GLOBAL.isGameOver = true;
+            GLOBAL.fnShowGameOverGUIs();
         }
     }
 
@@ -132,10 +134,15 @@ class Player {
 }
 
 
-
 function Start() {
     // Clone the Player's position
     previousPosition = PLAYER.position.clone();
 
     GLOBAL.player = new Player(10, 10, 10, 10, 0, 0, 10, 100, 1, 0, 0, 0);
 }
+
+function resetPlayerState() {
+    GLOBAL.player = new Player(10, 10, 10, 10, 0, 0, 10, 100, 1, 0, 0, 0);
+}
+
+GLOBAL.fnResetPlayerState = resetPlayerState;

@@ -32,6 +32,14 @@ GLOBAL.guiBtnSkillSpeed = GUI.getObject("GUI_Btn_Skill_Speed");
 GLOBAL.guiBtnSkillBullet = GUI.getObject("GUI_Btn_Skill_Bullet");
 GLOBAL.guiBtnSkillHp = GUI.getObject("GUI_Btn_Skill_Hp");
 
+// Game-Over
+GLOBAL.guiBoardGameOver = GUI.getObject("GUI_Board_GameOver");
+GLOBAL.guiGameOverRound = GUI.getObject("GUI_GameOver_Round");
+GLOBAL.guiGameOverLevel = GUI.getObject("GUI_GameOver_Level");
+GLOBAL.guiBtnGameOverHome = GUI.getObject("GUI_GameOver_Home");
+GLOBAL.guiBtnGameOverReplay = GUI.getObject("GUI_GameOver_Replay");
+
+
 
 // When Game Start first, Setting the All of GUIs Offset and Size -> Working Bad
 REDBRICK.Signal.addListener("UPDATE_GUI_SETTING_FIRST", function(params) {
@@ -137,9 +145,65 @@ REDBRICK.Signal.addListener("UPDATE_GUI_SETTING_FIRST", function(params) {
     GLOBAL.guiRound_Infinite.size.x.value = 5;
     GLOBAL.guiRound_Infinite.size.y.value = 5;
 
+    // Game-Over
+    GLOBAL.guiBoardGameOver.offset.x.value = 0;
+    GLOBAL.guiBoardGameOver.offset.y.value = 0;
+    GLOBAL.guiBoardGameOver.size.x.value = 90;
+    GLOBAL.guiBoardGameOver.size.y.value = 90;
+
+    GLOBAL.guiGameOverRound.offset.x.value = -10;
+    GLOBAL.guiGameOverRound.offset.y.value = 15;
+    GLOBAL.guiGameOverRound.size.x.value = 20;
+    GLOBAL.guiGameOverRound.size.y.value = 10;
+
+    GLOBAL.guiGameOverLevel.offset.x.value = -10;
+    GLOBAL.guiGameOverLevel.offset.y.value = 0;
+    GLOBAL.guiGameOverLevel.size.x.value = 20;
+    GLOBAL.guiGameOverLevel.size.y.value = 10;
+
+    GLOBAL.guiBtnGameOverHome.offset.x.value = -5;
+    GLOBAL.guiBtnGameOverHome.offset.y.value = -25;
+    GLOBAL.guiBtnGameOverHome.size.x.value = 10;
+    GLOBAL.guiBtnGameOverHome.size.y.value = 10;
+
+    GLOBAL.guiBtnGameOverReplay.offset.x.value = 5;
+    GLOBAL.guiBtnGameOverReplay.offset.y.value = -25;
+    GLOBAL.guiBtnGameOverReplay.size.x.value = 10;
+    GLOBAL.guiBtnGameOverReplay.size.y.value = 10;
+
 
     GLOBAL.guiBoardSkillSelect.hide();
     GLOBAL.guiBtnSkillSpeed.hide();
     GLOBAL.guiBtnSkillBullet.hide();
     GLOBAL.guiBtnSkillHp.hide();
+
+    GLOBAL.guiBoardGameOver.hide();
+    GLOBAL.guiGameOverRound.hide();
+    GLOBAL.guiGameOverLevel.hide();
+    GLOBAL.guiBtnGameOverHome.hide();
+    GLOBAL.guiBtnGameOverReplay.hide();
+
 })
+
+function showGameOverGUIs() {
+    if (GLOBAL.gameRound > 5) {
+        GLOBAL.guiGameOverRound.setText("                     Infinite");
+    } else {
+        GLOBAL.guiGameOverRound.setText("                     " + GLOBAL.gameRound);
+    }
+    GLOBAL.guiGameOverLevel.setText("                     " + GLOBAL.player.level);
+    GLOBAL.guiBoardGameOver.show();
+    GLOBAL.guiGameOverRound.show();
+    GLOBAL.guiGameOverLevel.show();
+    GLOBAL.guiBtnGameOverHome.show();
+    GLOBAL.guiBtnGameOverReplay.show();
+}
+
+function showLobbyGUIs() {
+    GLOBAL.guiBoardLobby.show();
+    GLOBAL.guiBtnGameStart.show();
+}
+
+
+GLOBAL.fnShowGameOverGUIs = showGameOverGUIs;
+GLOBAL.fnShowLobbyGUIs = showLobbyGUIs;

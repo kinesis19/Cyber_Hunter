@@ -8,6 +8,7 @@ GLOBAL.enemyMaxCount = 10;
 // Game System
 GLOBAL.isLobby = true;
 GLOBAL.isGameStart = false;
+GLOBAL.isGameOver = false;
 
 
 let frameCount = 0;
@@ -133,21 +134,38 @@ function Start(){
     GLOBAL.guiBtnGameStart.onClick(() => {
         // REDBRICK.Signal.send("UPDATE_CHECK_INGAME", GLOBAL.isLobby);
         GLOBAL.bgmLobby.stop();
-        console.log("CCC");
         GLOBAL.isLobby = false;
         GLOBAL.isGameStart = true;
         GLOBAL.guiBoardLobby.hide();
         GLOBAL.guiBtnGameStart.hide();
+        GLOBAL.fnStartEnemySpawn();
         PLAYER.changePlayerSpeed(GLOBAL.player.speed);
+
+        // [Game Data Reset]
+        GLOBAL.fnResetPlayerState();
     });
+
+    GLOBAL.guiBtnGameOverHome.onClick(() => {
+        GLOBAL.bgmInGame.stop();
+        GLOBAL.bgmLobby.play();
+        GLOBAL.isLobby = true;
+        GLOBAL.isGameStart = false;
+        GLOBAL.guiBoardGameOver.hide();
+        GLOBAL.guiGameOverRound.hide();
+        GLOBAL.guiGameOverLevel.hide();
+        GLOBAL.guiBtnGameOverHome.hide();
+        GLOBAL.guiBtnGameOverReplay.hide();
+        GLOBAL.fnShowLobbyGUIs();
+    });
+
 }
 
 // Using the Update Method to Update GUI
 function Update(dt){
     // Lobby
-    console.log(GLOBAL.isLobby);
     // Lobby일 때는 미실행
     if(GLOBAL.isLobby == true){
+        GLOBAL.fnStopEnemySpawn();
         GLOBAL.bgmLobby.play();
         GLOBAL.guiBoardKill.setText(" ");
         PLAYER.changePlayerSpeed(0);
