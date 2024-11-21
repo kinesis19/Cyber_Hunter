@@ -183,6 +183,7 @@ function stopEnemySpawn() {
 
 GLOBAL.fnStopEnemySpawn = stopEnemySpawn;
 GLOBAL.fnStartEnemySpawn = startEnemySpawn;
+GLOBAL.fnRemoveAllEnemies = removeAllEnemies;
 
 const enemyObject = WORLD.getObject("robot");
 
@@ -231,3 +232,18 @@ REDBRICK.Signal.addListener("UPDATE_TOGGLE_PAUSE", () => {
         PLAYER.changePlayerSpeed(GLOBAL.player.speed); // PLAYER 객체의 속도 업데이트
     }
 });
+
+function removeAllEnemies() {
+    // GLOBAL.enemyList 순회
+    GLOBAL.enemyList.forEach(enemy => {
+        // 적 객체를 월드에서 제거
+        if (enemy && enemy.object) {
+            WORLD.remove(enemy.object);
+        }
+    });
+
+    // GLOBAL.enemyList 초기화
+    GLOBAL.enemyList = [];
+}
+
+

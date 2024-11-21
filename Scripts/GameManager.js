@@ -80,7 +80,7 @@ const playerUpdate = (dt) => {
 
 
     // Player's Obj Update
-    GLOBAL.ground.position.set(PLAYER.position.x, 0, PLAYER.position.z);
+    // GLOBAL.ground.position.set(PLAYER.position.x, 0, PLAYER.position.z);
     GLOBAL.ground.body.needUpdate = true;
 }
 
@@ -118,6 +118,7 @@ function Start(){
     GLOBAL.guiBtnSkillHp.onClick(() => {
         REDBRICK.Signal.send("UPDATE_TOGGLE_PAUSE");
         GLOBAL.player.levelUpHp();
+        GLOBAL.player.nowHp = GLOBAL.player.maxHp;
         hideSkillSelectGUI();
 
         let pos = new THREE.Vector2();
@@ -136,13 +137,21 @@ function Start(){
         GLOBAL.bgmLobby.stop();
         GLOBAL.isLobby = false;
         GLOBAL.isGameStart = true;
+        GLOBAL.isPaused = false;
         GLOBAL.guiBoardLobby.hide();
         GLOBAL.guiBtnGameStart.hide();
         GLOBAL.fnStartEnemySpawn();
         PLAYER.changePlayerSpeed(GLOBAL.player.speed);
 
         // [Game Data Reset]
+        PLAYER.move(0, 0, 0);
         GLOBAL.fnResetPlayerState();
+        GLOBAL.gameRound = 1;
+        GLOBAL.isRoundClear = true;
+
+        GLOBAL.playerKillCount = 0;
+        GLOBAL.enemyMaxCount = 10;
+        GLOBAL.fnRemoveAllEnemies();
     });
 
     GLOBAL.guiBtnGameOverHome.onClick(() => {
