@@ -43,18 +43,18 @@ class Enemy{
                 const newPosition = this.object.position.clone().add(this.moveVector);
     
                 // Check for potential collisions before moving
-                let collision = false;
-                for (let other of enemyList) {
-                    if (other !== this && newPosition.distanceTo(other.object.position) < (this.radius + other.radius)) {
-                        collision = true;
-                        break;
-                    }
-                }
+                // let collision = false;
+                // for (let other of enemyList) {
+                //     if (other !== this && newPosition.distanceTo(other.object.position) < (this.radius + other.radius)) {
+                //         collision = true;
+                //         break;
+                //     }
+                // }
     
-                if (!collision) {
-                    this.object.position.add(this.moveVector);
-                }
-    
+                // if (!collision) {
+                //     this.object.position.add(this.moveVector);
+                // }
+                this.object.position.add(this.moveVector);
                 // Enemy lookAt Player, But position Y is staying current position
                 const lookAtPosition = new THREE.Vector3(this.player.position.x, this.object.position.y, this.player.position.z);
                 this.object.lookAt(lookAtPosition);
