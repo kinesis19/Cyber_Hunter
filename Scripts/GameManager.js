@@ -166,6 +166,32 @@ function Start(){
         GLOBAL.guiBtnGameOverReplay.hide();
         GLOBAL.fnShowLobbyGUIs();
     });
+    
+    GLOBAL.guiBtnGameOverReplay.onClick(() => {
+    // REDBRICK.Signal.send("UPDATE_CHECK_INGAME", GLOBAL.isLobby);
+    GLOBAL.bgmLobby.stop();
+    GLOBAL.isLobby = false;
+    GLOBAL.isGameStart = true;
+    GLOBAL.isPaused = false;
+    GLOBAL.fnStartEnemySpawn();
+    PLAYER.changePlayerSpeed(GLOBAL.player.speed);
+
+    // [Game Data Reset]
+    PLAYER.move(0, 0, 0);
+    GLOBAL.fnResetPlayerState();
+    GLOBAL.gameRound = 1;
+    GLOBAL.isRoundClear = true;
+
+    GLOBAL.playerKillCount = 0;
+    GLOBAL.enemyMaxCount = 10;
+    GLOBAL.fnRemoveAllEnemies();
+
+    GLOBAL.guiBoardGameOver.hide();
+    GLOBAL.guiBtnGameOverHome.hide();
+    GLOBAL.guiBtnGameOverReplay.hide();
+    GLOBAL.guiGameOverRound.hide();
+    GLOBAL.guiGameOverLevel.hide();
+})
 
 }
 
