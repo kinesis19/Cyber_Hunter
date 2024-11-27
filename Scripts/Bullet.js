@@ -62,7 +62,7 @@ let bulletSize = 1;
 const bullets = [];
 const gunObject = WORLD.getObject("Gun");
 let bulletInterval = null; // Bullet 생성 타이머
-let duration = 1000;
+let duration = 500;
 
 // Bullet 생성 함수
 const fireProjectile = () => {

@@ -11,7 +11,7 @@ class Enemy{
         // Enemy move Vector
         this.moveVector = new THREE.Vector3();
         // Enemy move speed
-        this.speed = 0.02;
+        this.speed = 0.05;
         // Define the radius for collision
         this.radius = 1; // Setting the radius of Enemy
 
