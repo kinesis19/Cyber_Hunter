@@ -197,6 +197,19 @@ function showGameOverGUIs() {
     GLOBAL.guiGameOverLevel.show();
     GLOBAL.guiBtnGameOverHome.show();
     GLOBAL.guiBtnGameOverReplay.show();
+
+
+    // Pause Btn 클릭시의 처리
+    if (!GLOBAL.isClickedPauseBtn && !GLOBAL.isGameOver) {
+        GLOBAL.guiBtnGameOverHome.hide();
+        GLOBAL.guiBtnGameOverReplay.hide();
+    } else if (GLOBAL.isClickedPauseBtn && !GLOBAL.isGameOver) {
+        GLOBAL.guiBoardGameOver.hide();
+        GLOBAL.guiGameOverRound.hide();
+        GLOBAL.guiGameOverLevel.hide();
+        GLOBAL.guiBtnGameOverHome.hide();
+        GLOBAL.guiBtnGameOverReplay.hide();
+    }
 }
 
 function showLobbyGUIs() {

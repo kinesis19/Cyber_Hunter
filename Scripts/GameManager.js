@@ -9,6 +9,7 @@ GLOBAL.enemyMaxCount = 10;
 GLOBAL.isLobby = true;
 GLOBAL.isGameStart = false;
 GLOBAL.isGameOver = false;
+GLOBAL.isClickedPauseBtn = false;
 
 
 let frameCount = 0;
@@ -130,6 +131,15 @@ function Start(){
 
     GLOBAL.guiBtnPause.onClick(() => {
         REDBRICK.Signal.send("UPDATE_TOGGLE_PAUSE");
+
+        if (!GLOBAL.isClickedPauseBtn) {
+            GLOBAL.fnShowGameOverGUIs();
+            GLOBAL.isClickedPauseBtn = true;
+        } else {
+            GLOBAL.fnShowGameOverGUIs();
+            GLOBAL.isClickedPauseBtn = false;
+        }
+
     });
 
     GLOBAL.guiBtnGameStart.onClick(() => {
