@@ -39,6 +39,9 @@ GLOBAL.guiGameOverLevel = GUI.getObject("GUI_GameOver_Level");
 GLOBAL.guiBtnGameOverHome = GUI.getObject("GUI_GameOver_Home");
 GLOBAL.guiBtnGameOverReplay = GUI.getObject("GUI_GameOver_Replay");
 
+// Game-Pause
+GLOBAL.guiBoardGamePause = GUI.getObject("GUI_Board_GamePause");
+
 
 
 // When Game Start first, Setting the All of GUIs Offset and Size -> Working Bad
@@ -182,6 +185,8 @@ REDBRICK.Signal.addListener("UPDATE_GUI_SETTING_FIRST", function(params) {
     GLOBAL.guiGameOverLevel.hide();
     GLOBAL.guiBtnGameOverHome.hide();
     GLOBAL.guiBtnGameOverReplay.hide();
+    
+    GLOBAL.guiBoardGamePause.hide();
 
 })
 
@@ -201,14 +206,17 @@ function showGameOverGUIs() {
 
     // Pause Btn 클릭시의 처리
     if (!GLOBAL.isClickedPauseBtn && !GLOBAL.isGameOver) {
+        GLOBAL.guiBoardGameOver.hide();
         GLOBAL.guiBtnGameOverHome.hide();
         GLOBAL.guiBtnGameOverReplay.hide();
+        GLOBAL.guiBoardGamePause.show();
     } else if (GLOBAL.isClickedPauseBtn && !GLOBAL.isGameOver) {
         GLOBAL.guiBoardGameOver.hide();
         GLOBAL.guiGameOverRound.hide();
         GLOBAL.guiGameOverLevel.hide();
         GLOBAL.guiBtnGameOverHome.hide();
         GLOBAL.guiBtnGameOverReplay.hide();
+        GLOBAL.guiBoardGamePause.hide();
     }
 }
 
