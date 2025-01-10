@@ -107,8 +107,12 @@ function Start() {
         console.error("Bullet template not found in WORLD.");
         return; // bulletTemplate이 없으면 종료
     }
-
-    startBulletSpawn(); // 게임 시작 시 Bullet 생성 타이머 시작
+    // // Game Start 버튼 클릭 시, bullet 생성으로 변경
+    // if (GLOBAL.isGameStart) {
+    //     startBulletSpawn(); // 게임 시작 시 Bullet 생성 타이머 시작
+    // } else {
+    //     stopBulletSpawn(); // 총알 생성 멈춤
+    // }
 
     REDBRICK.Signal.addListener("TOGGLE_PAUSE", () => {
         GLOBAL.isPaused = !GLOBAL.isPaused;
@@ -138,6 +142,14 @@ function Start() {
 function Update(dt){
     // Lobby일 때는 미 실행
     // if(GLOBAL.isLobby == true) return;
+    
+    // Game Start 버튼 클릭 시, bullet 생성으로 변경
+    if (GLOBAL.isGameStart) {
+        startBulletSpawn(); // 게임 시작 시 Bullet 생성 타이머 시작
+    } else {
+        stopBulletSpawn(); // 총알 생성 멈춤
+    }
+
     for(let i = 0; i < bullets.length; i++){
         bullets[i].update(dt);
         
