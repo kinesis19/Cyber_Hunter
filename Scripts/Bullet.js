@@ -10,7 +10,7 @@ class Bullet {
         // Velocity vector for movement
         this.velocity = null;
         // Bullet life duration
-        this.life = 0.4;
+        this.life = 2.0;
 
         this.init();
     }
