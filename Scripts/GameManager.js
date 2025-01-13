@@ -187,7 +187,14 @@ function Start(){
     PLAYER.changePlayerSpeed(GLOBAL.player.speed);
 
     // [Game Data Reset]
-    PLAYER.move(0, 0, 0);
+    // PLAYER.move(0, 0, 0);
+
+    PLAYER.position.set(0, 2, 0);
+    
+    if (PLAYER.body) {
+        PLAYER.body.needUpdate = true;
+    }
+
     GLOBAL.fnResetPlayerState();
     GLOBAL.gameRound = 1;
     GLOBAL.isRoundClear = true;
