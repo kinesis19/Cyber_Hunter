@@ -100,6 +100,7 @@ let spawnInterval = null; // Save spawn Interval ID
 let listenersInitialized = false; // Check listener is Initialized
 GLOBAL.isPaused = false;  // 게임 일시 정지 여부를 확인하는 변수
 GLOBAL.enemyHp = 10;
+GLOBAL.enemyAtkDmg = 1;
 let spawn_num = 0;
 
 function Start(){
@@ -215,7 +216,9 @@ function spawnEnemyRandomly() {
 
     // const enemy = new Enemy(clone, PLAYER, GLOBAL.enemyHp, 5, 1);
     // GLOBAL.enemyList.push(enemy);
-    const enemy = new Enemy(clone, PLAYER, GLOBAL.enemyHp, spawn_num, 5, 1);
+
+    const enemy = new Enemy(clone, PLAYER, GLOBAL.enemyHp, spawn_num, GLOBAL.enemyAtkDmg, 1);
+    
     GLOBAL.enemyList.push(enemy);
     spawn_num++;
 }
