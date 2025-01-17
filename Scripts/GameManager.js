@@ -1,6 +1,6 @@
 GLOBAL.gameRound = 1;
 GLOBAL.isRoundClear = true;
-GLOBAL.mobSpawnSpeed = 3000;
+GLOBAL.mobSpawnSpeed = 1000;
 
 GLOBAL.playerKillCount = 0;
 GLOBAL.enemyMaxCount = 10;
@@ -258,34 +258,35 @@ REDBRICK.Signal.addListener("UPDATE_NEXT_ROUND", function(params) {
         GLOBAL.player.maxExp += 10;
         GLOBAL.enemyHp += 5;
         GLOBAL.enemyAtkDmg = 1;
+        GLOBAL.mobSpawnSpeed = 1000;
     } else if(GLOBAL.player.level == 2){
         GLOBAL.player.maxExp += 10;
-        GLOBAL.mobSpawnSpeed = 2000;
+        GLOBAL.mobSpawnSpeed = 700;
         GLOBAL.gameRound++;
         GLOBAL.enemyHp += 10;
         GLOBAL.enemyAtkDmg = 3;
     }else if(GLOBAL.player.level == 5){
         GLOBAL.player.maxExp += 10;
-        GLOBAL.mobSpawnSpeed = 1500;
+        GLOBAL.mobSpawnSpeed = 500;
         GLOBAL.gameRound++;
         GLOBAL.enemyHp += 15;
         GLOBAL.enemyAtkDmg = 5;
     }else if(GLOBAL.player.level == 7){
         GLOBAL.player.maxExp += 10;
-        GLOBAL.mobSpawnSpeed = 1000;
+        GLOBAL.mobSpawnSpeed = 250;
         GLOBAL.gameRound++;
         GLOBAL.enemyHp += 20;
         GLOBAL.enemyAtkDmg = 6;
     }else if(GLOBAL.player.level == 10){
         GLOBAL.player.maxExp += 10;
-        GLOBAL.mobSpawnSpeed = 500;
+        GLOBAL.mobSpawnSpeed = 100;
         GLOBAL.gameRound++;
         GLOBAL.enemyHp += 25;
         GLOBAL.enemyAtkDmg = 7;
     }else{ // 인피니티
         GLOBAL.player.maxExp += 100;
         GLOBAL.enemyHp += 30;
-        GLOBAL.mobSpawnSpeed = 250;
+        GLOBAL.mobSpawnSpeed = 50;
         GLOBAL.enemyAtkDmg += 2;
     }
 });
