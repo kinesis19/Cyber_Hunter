@@ -62,7 +62,7 @@ let bulletSize = 1;
 const bullets = [];
 const gunObject = WORLD.getObject("Gun");
 let bulletInterval = null; // Bullet 생성 타이머
-let duration = 500;
+GLOBAL.bulletDuration = 500;
 
 // Bullet 생성 함수
 const fireProjectile = () => {
@@ -83,7 +83,7 @@ const fireProjectile = () => {
 function startBulletSpawn() {
 
     if (bulletInterval) return; // 이미 실행 중이면 중복 방지
-    bulletInterval = setInterval(fireProjectile, duration);
+    bulletInterval = setInterval(fireProjectile, GLOBAL.bulletDuration);
 }
 
 // Bullet 타이머 정지

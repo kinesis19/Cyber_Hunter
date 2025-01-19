@@ -122,7 +122,7 @@ class Player {
     }
 
     levelUpBullet() {
-        GLOBAL.player.atk = GLOBAL.player.atk + 2;
+        GLOBAL.bulletDuration = GLOBAL.bulletDuration - 20;
         this.bulletLv++;
     }
 
