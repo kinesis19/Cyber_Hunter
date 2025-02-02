@@ -13,6 +13,7 @@ GLOBAL.guiProgressBarPlayerLv = GUI.getObject
 
 GLOBAL.guiBoardLobby = GUI.getObject("GUI_Board_Lobby"); 
 GLOBAL.guiBtnGameStart = GUI.getObject("GUI_Btn_GameStart");
+GLOBAL.guiBtnRank = GUI.getObject("GUI_Rank_Button");
 
 
 // InGame-Round
@@ -187,6 +188,7 @@ REDBRICK.Signal.addListener("UPDATE_GUI_SETTING_FIRST", function(params) {
     GLOBAL.guiBtnGameOverReplay.hide();
     
     GLOBAL.guiBoardGamePause.hide();
+    GLOBAL.guiBtnRank.hide();
 
 })
 
@@ -202,6 +204,7 @@ function showGameOverGUIs() {
     GLOBAL.guiGameOverLevel.show();
     GLOBAL.guiBtnGameOverHome.show();
     GLOBAL.guiBtnGameOverReplay.show();
+    GLOBAL.guiBtnRank.show();
 
 
     // Pause Btn 클릭시의 처리
@@ -223,6 +226,7 @@ function showGameOverGUIs() {
 function showLobbyGUIs() {
     GLOBAL.guiBoardLobby.show();
     GLOBAL.guiBtnGameStart.show();
+    GLOBAL.guiBtnRank.hide();
 }
 
 

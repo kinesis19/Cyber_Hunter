@@ -93,6 +93,7 @@ class Player {
             this.nowHp = 0;
             GLOBAL.isPaused = true;
             GLOBAL.isGameOver = true;
+            REDBRICK.Rank.saveScore({ score : GLOBAL.playerKillCount, order: "DESC" });
             GLOBAL.fnShowGameOverGUIs();
         }
     }
