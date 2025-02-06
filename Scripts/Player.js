@@ -51,7 +51,7 @@ class Player {
                     //     this.takeDamage(enemyList[i].damage);
                     //     this.lastHitTime = currentTime;
                     // }
-                    if (this.nowHp > 0) {    
+                    if (this.nowHp > 0 && GLOBAL.enemyList[i].is_alive) {    
                         this.takeDamage(enemyList[i].damage);
                     }
                     this.lastHitTime = currentTime;
