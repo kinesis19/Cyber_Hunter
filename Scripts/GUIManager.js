@@ -189,6 +189,7 @@ REDBRICK.Signal.addListener("UPDATE_GUI_SETTING_FIRST", function(params) {
     
     GLOBAL.guiBoardGamePause.hide();
     GLOBAL.guiBtnRank.hide();
+    GLOBAL.guiBoardGamePause.hide();
 
 })
 
@@ -208,20 +209,20 @@ function showGameOverGUIs() {
         GLOBAL.guiBtnRank.show();
     }, 1000); //wait 1 seconds
 
-    // Pause Btn 클릭시의 처리
-    if (!GLOBAL.isClickedPauseBtn && !GLOBAL.isGameOver) {
-        GLOBAL.guiBoardGameOver.hide();
-        GLOBAL.guiBtnGameOverHome.hide();
-        GLOBAL.guiBtnGameOverReplay.hide();
-        GLOBAL.guiBoardGamePause.show();
-    } else if (GLOBAL.isClickedPauseBtn && !GLOBAL.isGameOver) {
-        GLOBAL.guiBoardGameOver.hide();
-        GLOBAL.guiGameOverRound.hide();
-        GLOBAL.guiGameOverLevel.hide();
-        GLOBAL.guiBtnGameOverHome.hide();
-        GLOBAL.guiBtnGameOverReplay.hide();
-        GLOBAL.guiBoardGamePause.hide();
-    }
+    // // Pause Btn 클릭시의 처리
+    // if (!GLOBAL.isClickedPauseBtn && !GLOBAL.isGameOver) {
+    //     GLOBAL.guiBoardGameOver.hide();
+    //     GLOBAL.guiBtnGameOverHome.hide();
+    //     GLOBAL.guiBtnGameOverReplay.hide();
+    //     GLOBAL.guiBoardGamePause.show();
+    // } else if (GLOBAL.isClickedPauseBtn && !GLOBAL.isGameOver) {
+    //     GLOBAL.guiBoardGameOver.hide();
+    //     GLOBAL.guiGameOverRound.hide();
+    //     GLOBAL.guiGameOverLevel.hide();
+    //     GLOBAL.guiBtnGameOverHome.hide();
+    //     GLOBAL.guiBtnGameOverReplay.hide();
+    //     GLOBAL.guiBoardGamePause.hide();
+    // }
 }
 
 function showLobbyGUIs() {
@@ -230,6 +231,35 @@ function showLobbyGUIs() {
     GLOBAL.guiBtnRank.hide();
 }
 
+function showPauseGUIs() {
+    if (GLOBAL.gameRound > 5) {
+        GLOBAL.guiGameOverRound.setText("                     Infinite");
+    } else {
+        GLOBAL.guiGameOverRound.setText("                     " + GLOBAL.gameRound);
+    }
+    // GLOBAL.guiGameOverRound.show();
+    // GLOBAL.guiGameOverLevel.show();
+    // GLOBAL.guiBtnGameOverHome.show();
+    // GLOBAL.guiBtnGameOverReplay.show();
+    // GLOBAL.guiBoardGamePause.show();
+
+    // Pause Btn 클릭시의 처리
+    if (!GLOBAL.isClickedPauseBtn && !GLOBAL.isGameOver) {
+        GLOBAL.guiGameOverRound.show();
+        GLOBAL.guiGameOverLevel.show();
+        GLOBAL.guiBtnGameOverHome.show();
+        GLOBAL.guiBtnGameOverReplay.show();
+        GLOBAL.guiBoardGamePause.show();
+    } else if (GLOBAL.isClickedPauseBtn && !GLOBAL.isGameOver) {
+        GLOBAL.guiGameOverRound.hide();
+        GLOBAL.guiGameOverLevel.hide();
+        GLOBAL.guiBtnGameOverHome.hide();
+        GLOBAL.guiBtnGameOverReplay.hide();
+        GLOBAL.guiBoardGamePause.hide();
+    }
+}
+
 
 GLOBAL.fnShowGameOverGUIs = showGameOverGUIs;
 GLOBAL.fnShowLobbyGUIs = showLobbyGUIs;
+GLOBAL.fnShowPauseGUIs = showPauseGUIs;

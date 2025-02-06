@@ -133,10 +133,10 @@ function Start(){
         REDBRICK.Signal.send("UPDATE_TOGGLE_PAUSE");
 
         if (!GLOBAL.isClickedPauseBtn) {
-            GLOBAL.fnShowGameOverGUIs();
+            GLOBAL.fnShowPauseGUIs();
             GLOBAL.isClickedPauseBtn = true;
         } else {
-            GLOBAL.fnShowGameOverGUIs();
+            GLOBAL.fnShowPauseGUIs();
             GLOBAL.isClickedPauseBtn = false;
         }
 
@@ -155,6 +155,7 @@ function Start(){
         GLOBAL.guiBoardLobby.hide();
         GLOBAL.guiBtnGameStart.hide();
         GLOBAL.guiBtnRank.hide();
+        GLOBAL.guiBoardGamePause.hide();
         GLOBAL.fnStartEnemySpawn();
         PLAYER.changePlayerSpeed(GLOBAL.player.speed);
 
@@ -167,6 +168,8 @@ function Start(){
         GLOBAL.playerKillCount = 0;
         GLOBAL.enemyMaxCount = 10;
         GLOBAL.fnRemoveAllEnemies();
+
+        GLOBAL.isClickedPauseBtn = false;
     });
 
     GLOBAL.guiBtnGameOverHome.onClick(() => {
@@ -215,6 +218,8 @@ function Start(){
         GLOBAL.guiGameOverRound.hide();
         GLOBAL.guiGameOverLevel.hide();
         GLOBAL.guiBtnRank.hide();
+        GLOBAL.guiBoardGamePause.hide();
+        GLOBAL.isClickedPauseBtn = false;
     })
 
 }
