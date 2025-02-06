@@ -110,7 +110,7 @@ REDBRICK.Signal.addListener("UPDATE_GUI_SETTING_FIRST", function(params) {
     // Top
 
     GLOBAL.guiBtnPause.offset.x.value = -46;
-    GLOBAL.guiBtnPause.offset.y.value = -45;
+    GLOBAL.guiBtnPause.offset.y.value = 45;
     GLOBAL.guiBtnPause.size.x.value = 4.5;
     GLOBAL.guiBtnPause.size.y.value = 8;
 
