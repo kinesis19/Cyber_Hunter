@@ -198,14 +198,15 @@ function showGameOverGUIs() {
     } else {
         GLOBAL.guiGameOverRound.setText("                     " + GLOBAL.gameRound);
     }
-    GLOBAL.guiGameOverLevel.setText("                     " + GLOBAL.player.level);
-    GLOBAL.guiBoardGameOver.show();
-    GLOBAL.guiGameOverRound.show();
-    GLOBAL.guiGameOverLevel.show();
-    GLOBAL.guiBtnGameOverHome.show();
-    GLOBAL.guiBtnGameOverReplay.show();
-    GLOBAL.guiBtnRank.show();
-
+    setTimeout(() => {
+        GLOBAL.guiGameOverLevel.setText("                     " + GLOBAL.player.level);
+        GLOBAL.guiBoardGameOver.show();
+        GLOBAL.guiGameOverRound.show();
+        GLOBAL.guiGameOverLevel.show();
+        GLOBAL.guiBtnGameOverHome.show();
+        GLOBAL.guiBtnGameOverReplay.show();
+        GLOBAL.guiBtnRank.show();
+    }, 1500); //wait 1.5 seconds
 
     // Pause Btn 클릭시의 처리
     if (!GLOBAL.isClickedPauseBtn && !GLOBAL.isGameOver) {
