@@ -217,7 +217,7 @@ function spawnEnemyRandomly() {
     // const enemy = new Enemy(clone, PLAYER, GLOBAL.enemyHp, 5, 1);
     // GLOBAL.enemyList.push(enemy);
 
-    const enemy = new Enemy(clone, PLAYER, GLOBAL.enemyHp, spawn_num, GLOBAL.enemyAtkDmg, 1);
+    const enemy = new Enemy(clone, PLAYER, GLOBAL.enemyHp, spawn_num, GLOBAL.enemyAtkDmg, 2);
     
     GLOBAL.enemyList.push(enemy);
     spawn_num++;

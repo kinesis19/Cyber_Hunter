@@ -119,7 +119,7 @@ class Player {
     }
 
     levelUpSpeed() {
-        this.speed = this.speed + 0.1;
+        this.speed = this.speed + 0.2;
         this.speedLv++;
         PLAYER.changePlayerSpeed(this.speed); // PLAYER 객체의 속도 업데이트
     }
