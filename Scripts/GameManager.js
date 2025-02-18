@@ -170,6 +170,25 @@ function Start(){
         GLOBAL.fnRemoveAllEnemies();
 
         GLOBAL.isClickedPauseBtn = false;
+        GLOBAL.bulletDuration = 600; // 기본 총알 발사 간격은 1초 (시작)
+        GLOBAL.enemyHp = 10;
+        GLOBAL.enemyAtkDmg = 1;
+        GLOBAL.mobSpawnSpeed = 1000;
+
+        GLOBAL.player.maxHp = 10;
+        GLOBAL.player.nowHp = 10;
+        GLOBAL.player.sp = 10;
+        GLOBAL.player.atk = 10;
+        GLOBAL.player.level = 0;
+        // GLOBAL.player.exp = 0;
+        // GLOBAL.player.maxExp = 100;
+        GLOBAL.player.money = 1;
+        GLOBAL.player.speed = 1;
+        GLOBAL.player.speedLv = 0;
+        GLOBAL.player.bulletLv = 0;
+        GLOBAL.player.hpLv = 0;
+        GLOBAL.player.dist = 4;
+        PLAYER.changePlayerSpeed(1);
     });
 
     GLOBAL.guiBtnGameOverHome.onClick(() => {
@@ -184,19 +203,49 @@ function Start(){
         GLOBAL.guiBtnGameOverReplay.hide();
         GLOBAL.guiBtnRank.hide();
         GLOBAL.fnShowLobbyGUIs();
+
+        
+        // [Game Data Reset]
+        PLAYER.move(0, 0, 0);
+        GLOBAL.fnResetPlayerState();
+        GLOBAL.gameRound = 1;
+        GLOBAL.isRoundClear = true;
+
+        GLOBAL.playerKillCount = 0;
+        GLOBAL.enemyMaxCount = 10;
+        GLOBAL.fnRemoveAllEnemies();
+
+        GLOBAL.isClickedPauseBtn = false;
+        GLOBAL.bulletDuration = 600; // 기본 총알 발사 간격은 1초 (시작)
+        GLOBAL.enemyHp = 10;
+        GLOBAL.enemyAtkDmg = 1;
+        GLOBAL.mobSpawnSpeed = 1000;
+        
+        GLOBAL.player.maxHp = 10;
+        GLOBAL.player.nowHp = 10;
+        GLOBAL.player.sp = 10;
+        GLOBAL.player.atk = 10;
+        GLOBAL.player.level = 0;
+        // GLOBAL.player.exp = 0;
+        // GLOBAL.player.maxExp = 100;
+        GLOBAL.player.money = 1;
+        GLOBAL.player.speed = 1;
+        GLOBAL.player.speedLv = 0;
+        GLOBAL.player.bulletLv = 0;
+        GLOBAL.player.hpLv = 0;
+        GLOBAL.player.dist = 4;
+        PLAYER.changePlayerSpeed(1);
     });
     
     GLOBAL.guiBtnGameOverReplay.onClick(() => {
         // REDBRICK.Signal.send("UPDATE_CHECK_INGAME", GLOBAL.isLobby);
-        GLOBAL.bgmLobby.stop();
-        GLOBAL.isLobby = false;
-        GLOBAL.isGameStart = true;
-        GLOBAL.isPaused = false;
-        GLOBAL.fnStartEnemySpawn();
-        PLAYER.changePlayerSpeed(GLOBAL.player.speed);
 
         // [Game Data Reset]
         // PLAYER.move(0, 0, 0);
+        // GLOBAL.bulletDuration = 600; // 기본 총알 발사 간격은 1초 (시작)
+        // GLOBAL.enemyHp = 10;
+        // GLOBAL.enemyAtkDmg = 1;
+        // GLOBAL.mobSpawnSpeed = 1000;
 
         PLAYER.position.set(0, 2, 0);
         
@@ -204,7 +253,7 @@ function Start(){
             PLAYER.body.needUpdate = true;
         }
 
-        GLOBAL.fnResetPlayerState();
+        // GLOBAL.fnResetPlayerState();
         GLOBAL.gameRound = 1;
         GLOBAL.isRoundClear = true;
 
@@ -220,6 +269,45 @@ function Start(){
         GLOBAL.guiBtnRank.hide();
         GLOBAL.guiBoardGamePause.hide();
         GLOBAL.isClickedPauseBtn = false;
+        
+        // [Game Data Reset]
+        PLAYER.move(0, 0, 0);
+        GLOBAL.fnResetPlayerState();
+        GLOBAL.gameRound = 1;
+        GLOBAL.isRoundClear = true;
+
+        GLOBAL.playerKillCount = 0;
+        GLOBAL.enemyMaxCount = 10;
+        GLOBAL.fnRemoveAllEnemies();
+
+        GLOBAL.isClickedPauseBtn = false;
+        GLOBAL.bulletDuration = 600; // 기본 총알 발사 간격은 1초 (시작)
+        GLOBAL.enemyHp = 10;
+        GLOBAL.enemyAtkDmg = 1;
+        GLOBAL.mobSpawnSpeed = 1000;
+        
+        GLOBAL.player.maxHp = 10;
+        GLOBAL.player.nowHp = 10;
+        GLOBAL.player.sp = 10;
+        GLOBAL.player.atk = 10;
+        GLOBAL.player.level = 0;
+        // GLOBAL.player.exp = 0;
+        // GLOBAL.player.maxExp = 100;
+        GLOBAL.player.money = 1;
+        GLOBAL.player.speed = 1;
+        GLOBAL.player.speedLv = 0;
+        GLOBAL.player.bulletLv = 0;
+        GLOBAL.player.hpLv = 0;
+        GLOBAL.player.dist = 4;
+        PLAYER.changePlayerSpeed(1);
+
+
+        GLOBAL.bgmLobby.stop();
+        GLOBAL.isLobby = false;
+        GLOBAL.isGameStart = true;
+        GLOBAL.isPaused = false;
+        GLOBAL.fnStartEnemySpawn();
+        PLAYER.changePlayerSpeed(GLOBAL.player.speed);
     })
 
 }

@@ -125,7 +125,7 @@ class Player {
     }
 
     levelUpBullet() {
-        if (GLOBAL.bulletDuration > 200) { // 최소 발사 속도 제한 (0.2초)
+        if (GLOBAL.bulletDuration > 200 && !GLOBAL.isLobby) { // 최소 발사 속도 제한 (0.2초)
             GLOBAL.bulletDuration -= 250; // 1초 → 0.75초 → 0.5초 → 0.25초 (업그레이드마다 0.25초 단축)
         }
         this.bulletLv++;
@@ -156,6 +156,7 @@ function Start() {
 }
 
 function resetPlayerState() {
+    GLOBAL.bulletDuration = 600;
     GLOBAL.player = new Player(10, 10, 10, 10, 0, 0, 10, 100, 1, 0, 0, 0);
 }
 

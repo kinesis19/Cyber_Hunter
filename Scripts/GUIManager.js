@@ -207,6 +207,7 @@ function showGameOverGUIs() {
         GLOBAL.guiBtnGameOverHome.show();
         GLOBAL.guiBtnGameOverReplay.show();
         GLOBAL.guiBtnRank.show();
+        GLOBAL.isGameStart = false;
     }, 1000); //wait 1 seconds
 
     // // Pause Btn 클릭시의 처리

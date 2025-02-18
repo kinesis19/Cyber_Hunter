@@ -62,7 +62,7 @@ let bulletSize = 1;
 const bullets = [];
 const gunObject = WORLD.getObject("Gun");
 let bulletInterval = null; // Bullet 생성 타이머
-GLOBAL.bulletDuration = 600; // 기본 총알 발사 간격은 1초
+GLOBAL.bulletDuration = 600; // 기본 총알 발사 간격은 1초 (시작)
 
 // Bullet 생성 함수
 const fireProjectile = () => {
