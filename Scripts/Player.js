@@ -125,8 +125,19 @@ class Player {
     }
 
     levelUpBullet() {
-        GLOBAL.bulletDuration = GLOBAL.bulletDuration - 20;
+        if (GLOBAL.bulletDuration > 200) { // 최소 발사 속도 제한 (0.2초)
+            GLOBAL.bulletDuration -= 250; // 1초 → 0.75초 → 0.5초 → 0.25초 (업그레이드마다 0.25초 단축)
+        }
         this.bulletLv++;
+    
+        console.log("New bullet duration:", GLOBAL.bulletDuration); // 디버깅 로그
+    
+        // 🔥 새로운 발사 속도 적용
+        if (GLOBAL.restartBulletSpawn) {
+            GLOBAL.restartBulletSpawn(); // 전역 함수 호출
+        } else {
+            console.error("restartBulletSpawn is not defined!");
+        }
     }
 
     levelUpHp() {
