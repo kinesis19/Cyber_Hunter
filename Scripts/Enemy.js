@@ -58,6 +58,7 @@ class Enemy{
                 // Enemy lookAt Player, But position Y is staying current position
                 const lookAtPosition = new THREE.Vector3(this.player.position.x, this.object.position.y, this.player.position.z);
                 this.object.lookAt(lookAtPosition);
+                this.object.rotateY(THREE.MathUtils.degToRad(265)); // Y축 기준으로 90도 회전
             }
         }
     }
