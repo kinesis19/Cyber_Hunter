@@ -88,6 +88,7 @@ const playerUpdate = (dt) => {
 
 
 function Start(){
+    PLAYER.body.needUpdate = true;
     // When Game Start first, Setting the All of GUIs Offset and Size
     REDBRICK.Signal.send("UPDATE_GUI_SETTING_FIRST");
 
@@ -189,6 +190,7 @@ function Start(){
         GLOBAL.player.hpLv = 0;
         GLOBAL.player.dist = 4;
         PLAYER.changePlayerSpeed(1);
+        PLAYER.position.set(0, 8, 0);
     });
 
     GLOBAL.guiBtnGameOverHome.onClick(() => {
@@ -235,6 +237,7 @@ function Start(){
         GLOBAL.player.hpLv = 0;
         GLOBAL.player.dist = 4;
         PLAYER.changePlayerSpeed(1);
+        PLAYER.position.set(0, 4, 0);
     });
     
     GLOBAL.guiBtnGameOverReplay.onClick(() => {
@@ -247,7 +250,7 @@ function Start(){
         // GLOBAL.enemyAtkDmg = 1;
         // GLOBAL.mobSpawnSpeed = 1000;
 
-        PLAYER.position.set(0, 2, 0);
+        PLAYER.position.set(0, 4, 0);
         
         if (PLAYER.body) {
             PLAYER.body.needUpdate = true;
@@ -308,6 +311,7 @@ function Start(){
         GLOBAL.isPaused = false;
         GLOBAL.fnStartEnemySpawn();
         PLAYER.changePlayerSpeed(GLOBAL.player.speed);
+        PLAYER.position.set(0, 4, 0);
     })
 
 }
